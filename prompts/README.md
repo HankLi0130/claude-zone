@@ -3,8 +3,17 @@
 ## 參考
 
 - [Spec-Driven Development with Coding Agents](https://github.com/https-deeplearning-ai/sc-spec-driven-development-files)
+- [Claude Code Tips: From Basics to Advanced](https://github.com/ykdojo/claude-code-tips)
 
 ## 學習
+
+```
+double check everything, every single claim in what you produced and at the end make a table of what you were able to verify
+```
+
+```
+dig into this issue, try to find the root cause.
+```
 
 ```
 Slimming RootError to "client-relevant" variants
