@@ -5,377 +5,559 @@ Course: https://academy.claude.com/courses/ai-native-sdlc-playbook
 
 # AI-Native SDLC 實戰手冊
 
-如何透過 AI，逐階段轉型你的 software development lifecycle。
+如何運用 AI，逐階段改造你的軟體開發生命週期。
 
-- Date
+- **日期：** 2026 年 8 月 21 日
+- **閱讀時間：** 46 分鐘
+- **作者：** Louis Claxton
 
-  2026 年 8 月 21 日
+## 程式碼不再是瓶頸
 
-- Reading time
+組織已開始運用 AI，以一年前難以想像的速度撰寫程式碼，然而，圍繞程式碼的流程卻沒有以同樣的速度改變。
 
-  46 分鐘
+許多工程團隊仍沿用相同的核准關卡、審查、交接與政策，使得使用 [Claude Code](https://claude.com/product/claude-code) 等 agentic coding 解決方案所帶來的生產力提升停滯不前。
 
-## Code 不再是瓶頸
+軟體開發生命週期（SDLC）是讓軟體從構想走向正式環境的流程。大多數組織採行的流程，都是相同六個階段的某種版本，涵蓋軟體的規劃、設計、建置、測試、部署與維護。傳統上，每個階段都是由不同角色負責的獨立階段。產品經理撰寫需求，技術架構師將需求轉換為設計，工程師實作設計，受監管企業的 QA 團隊負責驗證，發布團隊負責交付，維運團隊則監控正在執行的系統。工作透過文件、工作單與簽核，在各階段之間流轉。
 
-組織已經開始使用 AI，以一年前難以想像的速度撰寫 code，但 code 周邊的流程並沒有以相同速度改變。
+傳統的軟體開發生命週期（SDLC）有繁重的流程，以確保每個步驟的責任歸屬與控管。然而，傳統 SDLC 的設計，是為了在撰寫與實作程式碼仍是最耗時、最昂貴階段的年代，將效率最大化；如今已不再如此。PRD、估算流程與產品安全審查，都是為了在可能長達數週、數月或數季的開發工作期間，強制達成共識。
 
-許多工程團隊仍然維持相同的 approval gates、reviews、handoffs 與 policies，使得使用像 [Claude Code](https://claude.com/product/claude-code) 這類 agentic coding solutions 所帶來的生產力提升受到阻礙。
+傳統 SDLC 的控管措施，也是假設每個步驟都由人類執行。創造最多價值的組織，已根據 agentic AI 現在能做到的事情重建流程，同時確保人類持續參與。本指南受到我們與客戶合作經驗的啟發，將介紹 Applied AI 團隊在 SDLC 各階段於內部整合 Claude 的多項最佳實務，以加速開發並讓流程運作得更快。
 
-software development lifecycle（SDLC）是讓軟體從構想到進入 production 的流程。大多數組織執行的都是相同六個階段的某種版本，涵蓋 planning、design、building、testing、deploying 與 maintaining software。傳統上，每個階段都是由不同角色負責的獨立 phase。Product managers 撰寫 requirements，technical architects 將其轉換成 designs，engineers 實作 designs，受監管企業中的 QA teams 負責驗證，release teams 負責發布，而 operations 則監控正在執行的系統。工作透過 documents、tickets 與 sign-offs 在各個 phases 之間流轉。
+當程式碼不再是瓶頸，而且建置階段的速度超過傳統 SDLC 所能配合的程度時，以下三件事便會成為現實：
 
-傳統 software development lifecycle（SDLC）為了確保每一步都有 accountability 與 control，因此流程十分繁重。然而，傳統 SDLC 的設計目標，是在「撰寫與實作 code 是最耗時且最昂貴階段」的時代最大化效率，而現在已經不是如此。PRDs、estimation rituals 與 product security reviews 的存在，都是為了在可能長達數週、數月甚至數季的 development work 中強制建立共識。
+- 瓶頸會移到建置階段前後的步驟。主要是規劃、審查／測試與部署，這些步驟仍以人類的速度運作。
+- 控管措施不再符合現實，並變得難以落實。當程式碼是由人撰寫時，逐行手動審查是合理的；但當 agent 撰寫了大部分 diff，這種方式就跟不上了。
+- 治理成本增加，因為例外情況仍要經由每週或每月召開的會議與委員會處理。
 
-傳統 SDLC 也包含一些 controls，而這些 controls 假設每一個步驟都是由人類執行。能夠從中創造最大價值的組織，已經根據 agentic AI 現在能做到的事情重新打造流程，同時確保 humans stay in the loop。在本指南中，我們會介紹 Applied AI team 在與客戶合作時得到的經驗，說明如何在 SDLC 的每個階段內部整合 Claude，以加速 development 並讓流程運作得更快。
+![](https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/6a8739a1b934ffe55bfc9715_44592f18.png)
 
-當 code 不再是瓶頸，而且 build phase 的執行速度快過傳統 SDLC 所允許的速度時，會出現三件事情：
+建置不再是限制，周圍那些以人類速度運作的步驟才是。以人類速度運作的階段維持原有長度，而建置則縮短為數小時。
 
-- 瓶頸會移到 build phase 左右兩側的步驟。主要是 plan、review/test 與 deploy，因為這些仍然以人類速度運作。
-- Controls 不再符合現實，因此變得難以執行。當 code 是人類撰寫時，逐行手動 review 很合理，但當 agents 撰寫了大部分 diff 後，這種方式就無法跟上。
-- Governance 成本上升，因為 exceptions 仍然必須經由每週或每月召開一次的 meetings 與 committees 處理。
+以安全瓶頸為例。安全團隊的規模是依照人類的產出量配置的，因此，當 agent 讓程式碼產出倍增時，不是審查佇列開始堆積，就是程式碼在審查不足的情況下發布。受監管的組織無法接受其中任何一種結果，因此，安全與政策檢查必須跟上 agent 的速度。
 
+為了更充分實現 agentic AI 帶來的生產力提升，並確保其安全性，傳統 SDLC 生命週期需要經歷與實作階段同等程度的轉型。
 
+**目錄**
 
-Build 已經不再是限制條件——真正的限制是它周圍以人類速度運作的步驟。以人類速度運作的 stages 長度保持不變，而 build 已縮短到數小時。
-
-我們可以用 security bottleneck 當作例子。Security teams 的人力配置是按照人類產出速度設計的，因此當 agents 讓 code output 成倍增加時，不是 review queue 越積越多，就是 code 在未充分 review 的情況下被發布。受監管的組織無法接受任何一種結果，因此它的 security 與 policy checks 必須能跟上 agents 的速度。
-
-為了更充分實現 agentic AI 的生產力提升，同時確保其安全性，傳統 SDLC lifecycle 必須經歷與 implementation phase 相同程度的轉型。
+1. 程式碼不再是瓶頸
+2. 實踐方法
+3. 第 1 階段——規劃
+4. 第 2 階段——設計
+5. 第 3 階段——建置
+6. 第 4 階段——測試
+7. 第 5 階段——部署
+8. 第 6 階段——維護
+9. 結語
 
 ## 什麼是 AI-native SDLC？
 
-AI-native SDLC 是一套重新構想的流程，它結合了舊有的 control objectives 與新的 enforcement。流程不再是線性的，而是變成 loop，並且 AI 被嵌入每一個節點。AI-native SDLC 推動自動化 handover，以及自動觸發後續 plays，藉此處理傳統 SDLC 各個 phases 之間手動且笨重的 handoff 問題。
+AI-native SDLC 是重新構思的流程，將原有的控管目標與新的執行方式結合。流程從線性流動轉為循環，並在每個環節嵌入 AI。AI-native SDLC 推動自動化交接與後續實踐方法的觸發，有助於解決傳統 SDLC 各階段之間交接仰賴人工且繁瑣的問題。
 
-你也可能會聽到這種轉變被稱為 agentic SDLC、AI SDLC，或簡單稱為 agentic software development——名稱不同，但描述的是同一件事情。
+你也會聽到這項轉變被稱為 agentic SDLC、AI SDLC，或直接稱為 agentic software development——名稱不同，但描述的是同一件事。
 
-
+![](https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/6a8858c2eccce183e7553cf2_53b010df.png)
 
 ### AI-native SDLC 六個階段的轉變
 
-下表呈現由 Claude 支援的 traditional SDLC 與 AI-native SDLC 兩端的差異。大多數組織會落在兩者之間的某個位置。
+下表呈現傳統 SDLC 與 Claude 支援的 AI-native SDLC 之間，光譜兩端的差異。大多數組織位於兩欄之間。
 
-右側欄位中貫穿所有 stages 的核心，是 committed artifact。每個 stage 都會以寫入 version control 的 artifact 作為結尾（包括 `intent.md`、`spec.md`、`plan.md`、diff 與其 tests、包含 review findings 的 PR，以及 incident record），而下一個 stage 則從讀取這個 artifact 開始。對早期 stages 而言，.md files 是主要 artifact，因為 product owner 與 agent 都能閱讀並根據相同 file 採取行動。從 Build 開始之後，artifact 就變成 code 與相關 records。整個 commits chain 同時也是 audit trail：誰要求了什麼、agent 產生了什麼，以及誰批准了它。
+| 階段 | 傳統 SDLC | AI-native SDLC |
+|---|---|---|
+| 規劃 | 由委員會蒐集需求，經過工作坊與簽核加以整理，再由人工撰寫。 | Claude 直接從來源彙整痛點，並記錄於 `intent.md`，讓人類可以閱讀，機器也能據以行動。 |
+| 設計 | 分析師撰寫規格，再由設計師解讀。 | 需求與設計濃縮為一次與 agent 協作的工作階段，以編寫成 skills 的標準引導，並在 git 中進行版本管理。 |
+| 建置 | 測試與程式碼由人工撰寫，文件則在主要開發工作完成後才撰寫。 | 測試與程式碼由 AI 產生，組織知識則維護為可供機器讀取、具版本管理的 `CLAUDE.md` 檔案與 skills。 |
+| 測試 | 在階段交界設置 QA 關卡。 | 持續性 evals 貫穿實作過程。 |
+| 部署 | 人類逐行審查程式碼，治理發生於審查週期中，而且往往不一致。 | 多層 agentic review，人類審查保留給受監管與關鍵程式碼。治理在 AI 行動時落實，並以 hooks 作為核准關卡。 |
+| 維護 | 人類監看正式環境，尋找 bug。 | Agents 監控已上線的部署。任何突破控制區間的情況都會被診斷，並以新的 `intent.md` 寫回循環。 |
 
-所有需要 judgment 的決策仍由 humans 負責。在 agentic SDLC 的世界中，human attention 會隨著需要被 review 的 artifacts 一起轉移。
+貫穿右欄的主線，是已提交的產出物。每個階段都以將一份產出物寫入版本控制作結，包括 `intent.md`、`spec.md`、`plan.md`、diff 與其測試、包含審查發現的 PR，以及事件紀錄；下一個階段則從讀取該產出物開始。在早期階段，`.md` 檔案是主要產出物，因為 product owner 與 agent 都能讀取同一份檔案並據以行動。從建置階段開始，產出物則是程式碼與其紀錄。這一連串 commit 也是稽核軌跡：誰提出了什麼要求、agent 產出了什麼，以及誰核准了它。
 
-## Plays
+凡是需要判斷的決策，仍由人類負責。在 agentic SDLC 的世界裡，人類的注意力會隨著必須審查的產出物而轉移。
 
-Plays 是這份 playbook 的核心，並被分組到六個非線性的 stages（Plan、Design、Build、Test、Deploy、Maintain）中，這六個 stages 合起來涵蓋完整 lifecycle。
+> 每個階段都會提交下一個階段能讀取的產出物。意圖、規格、計畫、diff 與審查發現，共同構成稽核軌跡。
 
-每個 play 都包含：
+## 實踐方法
 
-- 有什麼改變；
+這些實踐方法是本手冊的核心，分為六個非線性階段：規劃、設計、建置、測試、部署與維護，共同涵蓋完整的生命週期。
+
+每項實踐方法都涵蓋：
+
+- 有哪些改變；
 - 如何開始；
-- 具體的 implementation steps；
-- Governance considerations；以及
-- 如何衡量是否有效。
+- 具體實作步驟；
+- 治理考量；以及
+- 如何衡量是否奏效。
 
-這些 steps 是模組化的，不同組織可以根據自己的需求，選擇優先轉型不同 stages。每個 play 都會在「Prerequisites」中列出 dependencies，而 dependency graph 會進一步將其視覺化。
+這些步驟採模組化設計，組織可依自身需求，選擇在不同時間優先改造不同階段。每項實踐方法都在「前置條件」中列出相依項目，相依關係圖則進一步加以呈現。
 
-一個 stage 會以 commit 一個 artifact 作為結束，該 commit 同時啟動下一個 stage。被接受的 `intent.md` 會觸發 requirements 與 design pass，獲批准的 `spec.md` 會觸發 plan mode，被 merged 的 PR 會觸發 pipeline，而 production 中超出 control band 的事件則會寫出下一個 `intent.md`，讓 loop 繼續。
+一個階段以提交產出物作結，而該 commit 會啟動下一個階段。接受 `intent.md` 會觸發需求與設計作業，核准 `spec.md` 會觸發 plan mode，合併 PR 會觸發 pipeline，而正式環境突破控制區間時，則會寫出下一份 `intent.md`，循環如此持續。
 
-一開始，你可以手動 prompt 每一個 step，最終狀態則是一個 loop：每一個被接受的 artifact 都會觸發下一個 gate。Human attention 會集中在 gates 上，review agent 標記出的內容，而不是每個 stage 都由人類從零開始。
+一開始，你會手動下 prompt 啟動每個步驟；最終狀態則是一個循環，每份獲接受的產出物都會觸發下一個關卡。人類的注意力集中在關卡上，審查 agent 標記的內容，而不是每個階段都從頭啟動。
 
+![](https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/6a8855c75344623fc81efcb8_5d5a3c05.png)
 
+各項實踐方法標示了所屬階段；箭頭則表示導入順序。兩者並不相同。可以從任何陶土色的實踐方法開始——沒有箭頭指向它，因此不需要先完成其他項目。對其他實踐方法而言，指向它的箭頭，代表應先導入的項目。
 
-Plays 會列出其所屬 stage；箭頭則表示應採用它們的順序。兩者並不相同。你可以從任何 clay play 開始——沒有箭頭指向它，因此它不需要任何前置條件。對其他任何 play 而言，所有指向它的箭頭，代表你應該先採用的 plays。
+## 第 1 階段——規劃
 
-### Capture as intent.md
+構想不再等待有人將它寫下來。以提出者自己的話，一次記錄意圖，形成具版本管理、可供下一階段據以行動的產出物。
 
-啟動 software development process 的 `intent.md` 可以透過不同途徑進入流程。可能是一個人產生想法、一張 ticket 被建立，或 incident 透過 alert 被發現（請參閱 Stage 6: Maintenance）。
+### 記錄為 intent.md
 
-當一個人有想法時，他們會與 Claude brainstorm，並產生一份 markdown proto-spec。在傳統 SDLC 中，同一個人還必須說服 product team 的成員，請對方與自己一起撰寫這個想法，或代為撰寫。
+啟動軟體開發流程的 `intent.md`，可以來自不同途徑。有人提出構想、有人建立工作單，或透過警示浮現事件，詳見第 6 階段：維護。
 
-Claude 產生的 proto-spec 是 human readable、version-controlled，並且可以立刻被下一個 stage 使用。這份 proto-spec 會被儲存為 `intent.md`。
+當一個人有了構想，可以與 Claude 腦力激盪，產出一份 Markdown 初步規格。在傳統 SDLC 中，同一個人接著必須說服產品團隊成員，與自己一起或代替自己將構想寫下來。
 
-無論 intent 是由 event trigger 還是 agent 產生，都適用相同 steps：product owner 會在 agent-written `intent.md` 被 committed 之前，先 review 並修正它。
+Claude 產生的初步規格可供人類閱讀、受到版本控制，而且能立即由下一階段使用。這份初步規格會儲存為 `intent.md`。
 
-建立這套機制是 platform 或 engineering team 的一次性工作。technical team member 需要建立 intent home，並決定誰具有 write 權限，因為 contributors 會來自組織中的不同部門。
+無論意圖來自事件觸發還是 agent，都適用相同步驟：在提交之前，product owner 必須審查並修正 agent 撰寫的 `intent.md`。
 
-Repository 建立之後，即使 contributors 沒有 git 經驗，也不需要直接使用 git。相反地，可以透過與 version-control system（例如 GitHub）連接的 connector，讓 Claude 從 claude.ai 或 Cowork 代表他們 commit markdown files。
+| 傳統 | AI-native |
+|---|---|
+| 一個構想在任何人能採取行動之前，必須經過 backlog 項目、user stories、story points 與細化會議。每次交接都會轉移責任歸屬，因此，最後抵達工程團隊的內容，已與提出者原本的意思相隔好幾層。 | 提出者與 Claude 腦力激盪，並將結果寫成 `intent.md`，這是一份以提出者自己的話撰寫的初步規格。產出物包含想要什麼、為什麼，以及受到哪些限制。重複性流程透過 skills 編寫。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 無。 |
+| 基礎設施 | 讓非工程人員能使用 Claude（claude.ai 或 Cowork）；一份已達成共識的 `intent.md` 範本；一個共享、具版本管理且由 product owner 關注的意圖存放處。對單一產品而言，最簡單的存放處是產品 repo 中的 `intent/` 資料夾。這種設置讓產出物鏈與由其衍生的程式碼放在一起。只有當意圖橫跨許多 repositories 時，獨立的意圖 repo 才值得額外的管理成本；在 monorepo 中，它就是一個目錄。第 3 階段：建置的側欄，會說明這個存放處與已持有紀錄的 Jira 或需求工具之間的關係。 |
+
+這項設置是平台或工程團隊的一次性工作。技術團隊成員需要建立意圖存放處，並決定誰可以寫入，因為許多貢獻者會來自組織內不同部門。
+
+Repository 建立後，沒有 git 經驗的貢獻者不需要直接使用 git。透過版本控制系統的 connector，例如 GitHub，Claude 就能從 claude.ai 或 Cowork 代替他們提交 Markdown 檔案。
 
 #### 如何執行
 
-1. Originator 用自己的話向 Claude 描述問題。Originator 可以描述目前做不到什麼、哪些人受到影響、改善後應該是什麼樣子，或哪些事情超出 scope。不需要使用正式語言。
-2. 持續 brainstorm，直到想法具體化。Claude 會提出 analyst 會問的問題：scope、users、constraints，以及 success 應該長什麼樣子。
-3. 請 Claude 使用組織的 template 將結果寫成 `intent.md`。這個 template 可以編碼成由 technical team member 設定、並經 lead 核准的 skill。內容可以涵蓋 problem、proposed outcome、affected users and systems、constraints，以及 open questions。
-4. Originator 修正 Claude 誤解的任何地方。
-5. 將 `intent.md` commit 到 shared home。Author 與 timestamp 也會進入紀錄，而 product owner 會從這裡接手這個 idea。
+1. 提出者以自己的話向 Claude 描述問題。可以描述目前做不到什麼、這個構想會影響誰、更好的狀態是什麼，或哪些內容不在範圍內。不需要正式用語。
+2. 持續腦力激盪，直到構想具體化。Claude 會提出分析師會問的問題：範圍、使用者、限制，以及成功的樣貌。
+3. 請 Claude 使用組織的範本，將結果寫成 `intent.md`。範本可編寫成 skill，由技術團隊成員建立，並經主管簽核。內容可以涵蓋問題、預期成果、受影響的使用者與系統、限制，以及待釐清問題。
+4. 提出者修正 Claude 誤解的任何內容。
+5. 將 `intent.md` 提交至共享存放處。作者與時間戳記會納入紀錄，product owner 則從這裡接手構想。
 
 ```markdown
-# Intent: claims status self-service
-Author: J. Ortiz (claims operations). Status: draft.
+# 意圖：理賠狀態自助查詢
+作者：J. Ortiz（理賠作業）。狀態：草稿。
 
-## Problem
-Customers phone the contact center to ask where their claim is.
-Handlers spend roughly a third of call time on status-only queries.
+## 問題
+客戶致電客服中心，詢問理賠進度。
+處理人員約有三分之一的通話時間，用於只詢問狀態的問題。
 
-## Proposed outcome
-Customers see claim status, next step and expected date in the portal.
+## 預期成果
+客戶能在入口網站查看理賠狀態、下一步與預計日期。
 
-## Affected users and systems
-Claims handlers, portal team, claims-core API.
+## 受影響的使用者與系統
+理賠處理人員、入口網站團隊、claims-core API。
 
-## Constraints
-No new PII in the portal session. Existing authentication only.
+## 限制
+入口網站 session 中不得新增 PII。僅使用既有的身分驗證。
 
-## Open questions
-Do third-party loss adjusters need access too?
+## 待釐清問題
+第三方理賠公證人是否也需要存取？
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Evidence 就是 committed `intent.md`，其中列出了 author、timestamp 與完整 revision history。它會記錄在 intent home 的 git history 中。Product owner 負責 approval，而將 intent 送入 Stage 2: Design 的 accept 或 reject decision，則記錄為 merge 或 closing review。
+證據是已提交的 `intent.md`，其中列出作者、時間戳記與完整修訂歷史。這些資訊記錄於意圖存放處的 git 歷史中。由 product owner 核准，而決定意圖是否進入第 2 階段：設計的接受或拒絕決策，則以合併或結案審查的形式記錄。
 
-### Requirements and design
+#### 如何衡量
 
-一旦 product owner 批准後，Claude 就會取得 accepted `intent.md`，並產生 requirements and design spec。這個過程會受到組織的 [skills](https://code.claude.com/docs/en/skills) 引導，包括 brand、security、compliance 與 UX。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 從第一次對話到提交 `intent.md` 的時間，可從意圖存放處的 git 歷史讀取，其中記錄了作者與時間戳記。預期會從長達數週的需求訪談與細化週期，縮短為數小時。 |
+| 落後指標 | 存活率，也就是 product owner 接受進入第 2 階段：設計，而非直接關閉的 `intent.md` 檔案比例。接受或拒絕的決策，記錄為產出物的合併或已結束的審查。此外，也要計算同一項變更在第一次提交 `spec.md` 之後，對 `intent.md` 所做的修改次數。 |
 
-Product owner 會 review 該 spec，但不需要自己撰寫。這個流程的目標，是建立一份 engineering team 能夠據此 planning 的 spec，同時標出有疑慮的區域。
+## 第 2 階段——設計
 
-Front-end work 是最清楚的例子。當 `intent.md` 被接受後，product owner 可以從 `intent.md` 在 [Claude Design](https://claude.com/product/design)（beta）中建立 design mock，對 mock 進行迭代，最後匯出至 Claude Code 進行 build。
+需求與設計濃縮為一次工作階段。政策在撰寫規格時就套用，而不是幾週後才在審查中發現。
+
+### 需求與設計
+
+在 product owner 核准後，Claude 會取得已接受的 `intent.md`，產出需求與設計規格。這項工作會由組織針對品牌、安全、合規與 UX 的 [skills](https://code.claude.com/docs/en/skills) 引導。
+
+Product owner 審查這份規格，但不負責撰寫。這個流程的目標，是產出工程團隊可以據以規劃的規格，並標記需要關注的問題。
+
+前端工作是最清楚的例子。`intent.md` 一經接受，product owner 就可以根據它，在 [Claude Design](https://claude.com/product/design)（beta）中製作設計 mockup，反覆調整，再匯出至 Claude Code 進行建置。
+
+| 傳統 | AI-native |
+|---|---|
+| 需求與設計是由不同團隊執行的獨立階段。分析師將構想正式整理為需求，設計師再將需求解讀為設計。這種區分是為了釐清責任，但速度緩慢，而且容易遺失資訊。 | 兩個階段在同一次由 prompt 啟動的工作階段中完成。Claude 取得 `intent.md`，產出受組織 skills 約束的需求與設計規格，並標記需要關注的問題。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 撰寫一份 `intent.md`，並將品牌、安全、合規與 UX 政策寫成 skills。 |
+| 基礎設施 | 一位能使用 Claude 的 product owner。不需要工程技能。 |
 
 #### 如何執行
 
-1. Product owner 在可使用組織 skills 的環境下開啟一個 session，並附上 `intent.md`。
-2. Product owner 的 prompt 指向 `intent.md`、列出 constraints，並要求標記 concerns。一開始手動執行，之後再將其 codify 成 organization-level slash command。接著，讓 intent home 中 `intent.md` 的 acceptance 成為 trigger：在 merge 時觸發 non-interactive job，載入 organization skills 執行 pass，並將 `spec.md` commit 成 pull request（Stage 5: Deploy 中的 CI/CD play 會介紹這些 plumbing）。從那之後，product owner 第一次介入就直接是 review。
-3. 同一位 product owner 對照原始 idea review spec。Spec 是否解決了已描述的 problem？`intent.md` 中的 open questions 是否已被回答，或被保留下來？
-4. 優先處理被標記的 concerns，因為這些正是 analyst 會 escalate 的地方。Product owner 在 engineering 看到 spec 之前，先與相對應的 policy owner 解決每一個 concern。
-5. 將 `spec.md` 與 `intent.md` 一起 commit。這組 files 會記錄原本提出了什麼，以及最後做了什麼 decision。
-6. Product owner 決定 spec 與 intent 是否進入 build，若屬於組織定義的 higher risk 類型，則諮詢 technical lead。這個決定永遠由 human team mate 做出，而接受 spec 的動作，就是啟動 Stage 3: Build 中 plan mode play 的 trigger。
+1. Product owner 開啟一個可使用組織 skills 的工作階段，並附上 `intent.md`。
+2. Product owner 的 prompt 指向 `intent.md`、列出限制，並要求標記疑慮。一開始手動執行，再將其編寫成組織層級的 slash command。接著，將意圖存放處接受 `intent.md` 設為觸發條件：在合併時啟動非互動式工作，載入組織的 skills 執行作業，並以 pull request 提交 `spec.md`。第 5 階段：部署中的 CI/CD 實踐方法會說明相關串接。從此，product owner 首次介入的時點就是審查。
+3. 同一位 product owner 對照構想審查規格。規格是否解決了原本陳述的問題？`intent.md` 中的待釐清問題是否已得到回答，或被延續至下一步？
+4. 優先處理標記的疑慮，因為這些正是分析師會向上呈報的問題。Product owner 在工程團隊看到規格之前，先與各項政策的負責人逐一解決。
+5. 將 `spec.md` 與 `intent.md` 一起提交。這一對檔案記錄了提出什麼要求，以及做出什麼決定。
+6. Product owner 決定規格與意圖是否進入建置；凡是組織歸類為較高風險的事項，都應諮詢技術主管。這項決定一律由人類團隊成員做出，而接受規格，正是啟動第 3 階段：建置中 plan mode 實踐方法的條件。
 
-#### 實際長什麼樣子（prompt）
+#### 實際樣貌（prompt）
 
 ```markdown
-Read the attached intent.md and produce a requirements and design spec for integrating it into our existing codebase. Apply the skills available to you so the plan conforms to our brand guidelines, security policies and UX standards. Document the spec fully as spec.md, ready to hand to the engineering team. Describe clearly any areas of concern, especially where you cannot satisfy contradicting policies.
+閱讀附上的 intent.md，並產出將其整合到既有 codebase 的需求與設計規格。套用你可使用的 skills，讓計畫符合我們的品牌指南、安全政策與 UX 標準。將規格完整記錄為 spec.md，準備交付工程團隊。清楚描述任何需要關注的問題，尤其是無法同時滿足互相矛盾政策的地方。
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Live policy 不再是數週後才在 review 中被發現，而是在 spec 被撰寫時就被讀取與套用。組織的 skills 會作為 spec 的 constraints。Spec、產生 spec 的 prompt，以及當時生效的 skill versions，都會被記錄在 version control 中。Product owner 對 spec sign off，並將被標記的 concerns 路由給指定的 policy owners。
+現行政策會在撰寫規格時被讀取並套用，而不是幾週後才在審查中發現。組織的 skills 會作為規格的限制條件。規格、產生規格的 prompt，以及當時生效的 skill 版本，都會記錄在版本控制中。Product owner 簽核規格，並將標記的疑慮交給指定的政策負責人。
 
-### 將 Claude Code plan mode 作為預設起點
+#### 如何衡量
 
-Engineers 會以 [plan mode](https://code.claude.com/docs/en/permission-modes) 開始 Claude Code sessions，將 Stage 2: Design 核准的 `spec.md` 提供給 Claude，並讓它訪談 engineers，持續對 plan 進行迭代，直到 engineer 滿意。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 同一项變更從提交 `intent.md` 到提交 `spec.md` 的經過時間，也就是兩個 git 時間戳記的差值，並與原本的需求加設計週期比較。 |
+| 落後指標 | 建置開始後的需求返工。計算同一項變更第一次提交 `plan.md` 之後，`spec.md` 的 commit 次數。Git log 可直接提供這項資訊。 |
+
+## 第 3 階段——建置
+
+沒有已接受的計畫，就不進行任何實作。組織知識成為 agent 讀取的檔案，防護措施則以程式碼執行，而非依賴習慣。
+
+### 以 Claude Code plan mode 作為預設起點
+
+工程師以 [plan mode](https://code.claude.com/docs/en/permission-modes) 啟動 Claude Code 工作階段，提供第 2 階段：設計中已核准的 `spec.md`，並讓 Claude 訪談自己，反覆調整計畫，直到工程師滿意為止。
+
+| 傳統 | AI-native |
+|---|---|
+| 工程師讀取設計後，就開始撰寫程式碼。如何進行變更，包括要修改哪些檔案、撰寫哪些測試，都留在工程師腦中，頂多寫成工作單留言。其他人無法審查。審查者第一眼看到的就是完成的 diff，而此時返工已相當緩慢。 | 工作從 Claude 在 plan mode 中產生的書面計畫開始；在這個模式下，Claude 可以讀取 codebase，但不能修改任何內容。工程師在程式碼撰寫前修正計畫，核准後的版本則提交為 `plan.md`，供後續階段核對。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 如果已有意圖產出物，提供 `intent.md` 或 `spec.md`；`CLAUDE.md` 也會有所幫助。 |
+| 基礎設施 | 可存取 repository 的 Claude Code。 |
 
 #### 如何執行
 
-1. Engineer 使用 Claude 的 plan mode 開始 session。
-2. Engineer 將 `intent.md` 與 `spec.md` 提供給 Claude，要求產生 implementation plan，其中需列出會變更的 files、工作的執行順序，以及用來證明完成結果的 tests。
-3. 質疑這份 plan：詢問這個 change 可能會破壞什麼、哪個 step 風險最高，以及 Claude 曾考慮但最後沒有採用哪些其他 options。
-4. 持續迭代，直到一名完全沒看過對話內容的 engineer，也能只靠這份 plan 完成 implementation。
-5. 將 approved plan commit 成 `plan.md`。這份 plan 會加入 audit trail，而 PR review play（Stage 5: Deploy）會檢查最終 diff 是否符合它。
-6. 接受 plan，並讓 Claude 開始 implementation。如果 plan 夠扎實，implementation 通常可以一次完成。
-7. 當 implementation 偏離 plan 時，在同一個 commit 中更新 `plan.md`。可以考慮使用 hook 強制確保兩者同步。
+1. 工程師以 plan mode 開始與 Claude 的工作階段。
+2. 工程師提供 `intent.md` 與 `spec.md`，要求 Claude 提出實作計畫，列明要修改的檔案、工作順序，以及能證明成果的測試。
+3. 深入追問計畫：這項變更可能破壞什麼、哪個步驟風險最高，以及 Claude 放棄了哪些其他方案。
+4. 持續迭代，直到一位從未看過這段對話的工程師，也能只憑計畫完成這項變更。
+5. 將核准的計畫提交為 `plan.md`。計畫會加入稽核軌跡，而第 5 階段：部署中的 PR 審查實踐方法，會將最終 diff 與它核對。
+6. 接受計畫，讓 Claude 實作。有了扎實的計畫，實作往往一輪就能完成。
+7. 當實作偏離計畫時，在同一個 commit 中更新 `plan.md`。可考慮使用 hook 強制兩者保持同步。
 
-#### 實際長什麼樣子（plan.md）
+#### 實際樣貌（plan.md）
 
 ```markdown
-# Plan: claims status self-service (from intent.md 2026-06-02)
+# 計畫：理賠狀態自助查詢（源自 intent.md 2026-06-02）
 
-## Files that change
-portal/src/claims/StatusPanel.tsx (new), claims-api/routes/status.py,
+## 要修改的檔案
+portal/src/claims/StatusPanel.tsx（新增）、claims-api/routes/status.py、
 claims-api/tests/test_status.py
 
-## Order of work
-1. Add the status endpoint behind existing auth.
-2. Panel against the endpoint.
-3. Wire into the portal nav.
+## 工作順序
+1. 在既有身分驗證機制下新增狀態 endpoint。
+2. 建立串接該 endpoint 的面板。
+3. 整合至入口網站導覽。
 
-## Risks
-The claims-core API rate-limits at 50 rps; the panel must cache.
+## 風險
+claims-core API 的速率限制為 50 rps；面板必須使用快取。
 
-## Proof
-test_status.py covers the four claim states; screenshot matches the
-approved mock.
+## 證明
+test_status.py 涵蓋四種理賠狀態；螢幕截圖符合已核准的 mockup。
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Design review 會發生在任何 code 被產生之前，此時改變方向還只需要修改一份 document。Plan mode 本身就會強制執行這件事情，因為在 engineer 接受 plan 以前，Claude 無法編輯 files。Plan 與其 revisions 都會被記錄，同時也會記錄誰接受了它。Routine changes 由 engineer 核准，而任何組織定義為 higher risk 的事情，則交由 tech lead 或 architect。
+設計審查在任何程式碼產生之前進行，此時改變方向仍只是修改文件的問題。Plan mode 本身就會強制落實這一點，因為在工程師接受計畫之前，Claude 無法編輯檔案。計畫、修訂內容，以及接受計畫的人，都會一併記錄。例行變更由工程師核准，而組織歸類為較高風險的事項，則交由技術主管或架構師處理。
 
-### Claude Code auto mode
+#### 如何衡量
 
-Claude Code 也可以使用 auto mode。Engineer 核准 plan，並在對 plan 滿意且完成迭代之後，Claude 會自動套用每一個 change，不需要每次 edit 都出現 prompt。隨著後續 plays 中的 guardrails 逐漸成熟（調整良好的 `CLAUDE.md`、將 policy 編碼進去的 skills、封鎖 unsafe actions 的 hooks，以及 Claude 可以自行執行的 test suite），對 routine work 而言，auto-accept 會成為預設：嚴謹的 `spec.md`、小範圍的 blast radius，以及已被 tests 覆蓋的 code。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 第一輪實作後就能合併的變更比例，以及從計畫核准到 PR 合併的時間；所需資料都在 PR metadata 中。 |
+| 落後指標 | 每項變更的返工次數，同樣來自 PR metadata；以及合併後的 diff 仍符合已提交 `plan.md` 的頻率。 |
 
-重心現在會從 user 看著 agent 每一次 edit 並 review actions，轉變成在較長的 autonomous sessions 結束後 review artifacts。Auto-accept mode 配合 worktrees 使用時，也能進一步支援個人與團隊的 parallelism，並且是讓 SDLC autonomous 運作、以及如 Stage 6: Maintenance 所述 closing the loop 的基礎。
+### 以 auto mode 執行 Claude Code
+
+Claude Code 也能以 auto mode 執行：工程師反覆調整計畫並確認滿意後予以核准，接著 Claude 套用每項變更時，就不會逐次提示確認。隨著後續實踐方法中的防護措施逐漸成熟——經過調校的 `CLAUDE.md`、將政策編寫成指示的 skills、阻擋不安全動作的 hooks，以及 Claude 能執行的測試套件——自動接受便成為例行工作的預設方式：一份嚴謹的 `spec.md`、有限的影響範圍，以及已受測試涵蓋的程式碼。
+
+重心因此從使用者看著 agent 編輯並審查動作，轉向在較長的自主工作階段結束後審查產出物。搭配 worktrees 使用時，自動接受模式還能支援個人與團隊的平行作業，也是自主執行 SDLC，以及完成第 6 階段：維護所述閉環的基礎。
+
+#### 側欄：既有系統與權威來源
+
+*適用於流程產生的每一項產出物。*
+
+既有 SDLC 流程很可能已經在追蹤產出物，只是沒有使用 Markdown 檔案。工作項目可能在 Jira，需求可能存放於內建法規追溯能力的工具，設計在 Figma，變更核准則由變更委員會處理。這些系統很難被取代，因為稽核人員與監管機關已經接受它們，其他團隊也仰賴它們，因此 AI-native SDLC 必須配合現有系統。
+
+轉向 AI-native SDLC 時，對流程產生的每一項產出物，都要指定一個系統作為權威來源，其他地方則持有副本或連向原始內容的連結。以下配置都可以設定為只有一個權威來源，而且不同產出物可以採用不同選擇：
+
+**以 repo 作為權威來源。** Markdown 產出物是權威紀錄，既有系統則參照 commit 中的檔案。對工程主導的組織而言，這可能是最簡潔的配置之一，因為所有紀錄都存在同一個工具中，並由同一個來源提供權威時間戳記。
+
+**以既有系統作為權威來源。** Jira、ServiceNow 或需求工具持有權威紀錄，Markdown 產出物則是工作副本。Claude 在工作階段開始時讀取紀錄，並在產出規格或計畫的同一個工作階段中，透過 MCP connector 將結果寫回。
+
+**以建立連結作為最低要求。** 所有產出物都註明紀錄 ID，所有既有紀錄也都包含 Markdown 檔案的 commit SHA。轉向 AI-native SDLC 時，建立連結是很好的起點，同時接受存在兩個權威來源的情況。
+
+既有系統與 Markdown 優先的系統可以共存，只要兩者之間有連結，或明確宣告其中一個為權威來源。
 
 ### CLAUDE.md
 
-[`CLAUDE.md`](https://code.claude.com/docs/en/memory) 提供 Claude 一名新進成員需要知道的 context，包括 conventions、commands、architecture，以及 team 最常遇到的 mistakes。過去存在人們腦中與 wikis 裡的 knowledge，現在變成 agent 每個 session 開始時都會讀取的 file，由整個 team 維護，並在每次錯誤發生後持續迭代。
+[`CLAUDE.md`](https://code.claude.com/docs/en/memory) 提供 Claude 新進成員所需的背景資訊，涵蓋慣例、命令、架構，以及團隊最常遇到的錯誤。過去存在人們腦中與 wiki 上的知識，會成為 agent 在每次工作階段開始時讀取的檔案，由整個團隊維護，並在每次發生錯誤時持續修訂。
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 無。 |
+| 基礎設施 | 一個 repo、已安裝的 Claude Code，以及一位熟悉 codebase 的工程師。 |
 
 #### 如何執行
 
-1. 在 repo 中執行 `/init`。Claude 會根據找到的內容產生初始版 `CLAUDE.md`。
-2. 將產生的 file 精簡成一名 new joiner 第一天需要知道的內容。保留 build、test 與 lint commands、真正重要的 conventions，以及 Claude 一直犯錯的項目。
-3. 將 `CLAUDE.md` check into git，放在 repo root，讓整個 team 共用同一個 version，並像 code 一樣 review 其 changes。
-4. 一條實用規則是：當 Claude 同一個錯誤犯兩次時，就把 correction 寫進 `CLAUDE.md`。
-5. 控制在一頁以內，因為 Claude 每個 session 開始時都會讀取全部內容，任何 stale 資訊都只會占用 context 而沒有任何益處。
+1. 在 repo 中執行 `/init`。Claude 會根據找到的內容，產生初始的 `CLAUDE.md`。
+2. 將產生的檔案精簡到新進成員第一天所需的內容。保留 build、test 與 lint 命令、重要慣例，以及 Claude 持續犯錯的事項。
+3. 將 `CLAUDE.md` 放在 repo 根目錄並提交至 git，讓整個團隊共用同一個版本，且變更像程式碼一樣接受審查。
+4. 這裡有一條實用規則：當 Claude 同一個錯誤犯了兩次，就將修正指示寫進 `CLAUDE.md`。
+5. 將長度控制在一頁以內，因為 Claude 會在工作階段開始時讀取全部內容；任何過時資訊都只會占用 context，卻沒有好處。
 
-#### 實際長什麼樣子（CLAUDE.md）
+#### 實際樣貌（CLAUDE.md）
 
-```javascript
-# Payments service
+```markdown
+# 付款服務
 
-## Commands
-- Build: make build
-- Test: make test (unit), make itest (integration, needs docker)
-- Lint: make lint (runs in CI; fix before pushing)
+## 命令
+- Build：make build
+- Test：make test（unit）、make itest（integration，需要 docker）
+- Lint：make lint（會在 CI 中執行；push 前先修正）
 
-## Conventions
-- Java 21, Spring Boot 3. No new Lombok.
-- Money is always BigDecimal, never double.
-- Every endpoint needs an integration test in src/itest.
+## 慣例
+- Java 21、Spring Boot 3。不得新增 Lombok。
+- 金額一律使用 BigDecimal，絕不使用 double。
+- 每個 endpoint 都需要在 src/itest 中有 integration test。
 
-## Architecture
-- api/ holds REST controllers, core/ holds domain logic,
-  adapters/ talks to external systems.
-- Kafka events are defined in schemas/; never edit generated classes.
+## 架構
+- api/ 放置 REST controllers，core/ 放置 domain logic，
+  adapters/ 與外部系統通訊。
+- Kafka events 定義於 schemas/；絕不編輯產生的 classes。
 
-## Things Claude gets wrong
-- Do not bump dependency versions; the platform team owns them.
-- The legacy v1/ package is frozen; changes go in v2/.
+## Claude 容易犯的錯誤
+- 不要調升相依套件版本；版本由平台團隊負責。
+- 舊版 v1/ package 已凍結；變更請放在 v2/。
 ```
 
-#### Governance considerations
+#### 治理考量
 
-`CLAUDE.md` 是 version controlled，因此 agent 執行工作時依循的 instructions 都可以被 review 與 audit。Team conventions 會透過這個 file 被套用，所有 changes 都記錄在 git history 中，而 code owners 會在 PR review 中核准這些 changes。
+`CLAUDE.md` 受到版本控制，因此 agent 遵循的指示可以審查與稽核。團隊慣例透過這份檔案套用，變更記錄於 git 歷史中，並由 code owners 在 PR 審查時核准。
 
-### Skills 作為 institutional knowledge
+#### 如何衡量
 
-Skills 是組織讓 institutional knowledge 具備可操作性的方式。Instructions 是明確的、version-controlled、可廣泛套用，並在 policy 改變時由中央更新。經驗法則是：需要一致套用的 institutional knowledge，寫成 skill；屬於 `CLAUDE.md` 或 prompt 的 components，就不要寫成 skill。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | Claude 重複犯下原本應由 `CLAUDE.md` 防止的錯誤之頻率。對 `CLAUDE.md` 的修正或變更應在 git 歷史中追蹤。 |
+| 落後指標 | 新團隊成員從加入到第一個 PR 合併的時間，資料來自 PR 歷史。 |
+
+### 以 Skills 承載組織知識
+
+Skills 是組織讓自身知識實際運作的方式。指示明確、受到版本控制、廣泛套用，並在政策變動時集中更新。經驗法則是：為必須一致套用的組織知識撰寫 skill；不要為應該放在 `CLAUDE.md` 或 prompt 裡的內容撰寫 skill。
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 不需要。擁有 `CLAUDE.md` 會有幫助，因為它讓 agent 的工作知識保留在 repo 中，但 skill 並不依賴它。 |
+| 基礎設施 | 一項具有明確負責人與書面權威來源的政策。 |
 
 #### 如何執行
 
-1. 選擇一項目前執行不一致的 knowledge。這可以是 security standard、API design convention，或 brand rule。
-2. 將它寫成 skill，也就是一個包含 `SKILL.md` 的 folder，其中 frontmatter 說明何時 trigger，而 body 說明該做什麼。Engineer 從 policy owner 的 source of truth 撰寫它，並使用 Claude 協助。
-3. 將 skill 放進 repo 的 `.claude/skills/<name>/`，讓它隨 code 一起發布，或透過 [plugin](https://code.claude.com/docs/en/plugin-marketplaces) 在 organization-wide 範圍散布。
-4. 測試 skill 是否會 trigger。用不同方式要求 Claude 執行相關 task，並確認每次都會載入 skill。
-5. Policy 改變時，更新 skill，並由 policy owner sign off 該 change。
-6. Engineers 在下一個 session 中會自動取得新 version。
+1. 選擇一項目前執行不一致的知識。可以是安全標準、API 設計慣例，或品牌規範。
+2. 將它寫成 skill，也就是一個包含 `SKILL.md` 的資料夾；其 frontmatter 說明何時觸發，內文則說明要做什麼。工程師以政策負責人的權威來源為依據，借助 Claude 撰寫。
+3. 將 skill 放在 repo 的 `.claude/skills/<name>/`，使其隨程式碼一起交付，或透過 [plugin](https://code.claude.com/docs/en/plugin-marketplaces) 發布至整個組織。
+4. 測試 skill 是否會觸發。以不同方式請 Claude 執行相關任務，確認每次都會載入 skill。
+5. 政策變更時，同步修改 skill，並請政策負責人簽核。
+6. 工程師會在下一次工作階段中自動取得新版本。
 
-#### 實際長什麼樣子（.claude/skills/secure-api-review/SKILL.md）
+#### 實際樣貌（.claude/skills/secure-api-review/SKILL.md）
 
 ```markdown
 ---
 name: secure-api-review
-description: Apply the API security standard. Use whenever creating or
-  modifying an external-facing endpoint, reviewing API code, or
-  generating an OpenAPI spec.
+description: 套用 API 安全標準。建立或修改對外 endpoint、
+  審查 API 程式碼，或產生 OpenAPI 規格時使用。
 ---
-# Secure API review
+# API 安全審查
 
-When you create or change an API endpoint:
-1. Authentication: every endpoint requires the gateway JWT;
-   no anonymous routes outside /health.
-2. Input validation: validate request bodies against the OpenAPI
-   schema and reject unknown fields.
-3. Audit: every state-changing endpoint emits an audit event with
-   actor, action, entity and timestamp.
-4. Data classification: fields tagged pii in the schema must never
-   appear in logs or error messages.
+建立或修改 API endpoint 時：
+1. 身分驗證：每個 endpoint 都需要 gateway JWT；
+   除了 /health 之外，不得有匿名 routes。
+2. 輸入驗證：依照 OpenAPI schema 驗證 request bodies，
+   並拒絕未知欄位。
+3. 稽核：每個會改變狀態的 endpoint，都必須發出包含
+   actor、action、entity 與 timestamp 的 audit event。
+4. 資料分類：schema 中標記為 pii 的欄位，絕不得出現在
+   logs 或錯誤訊息中。
 
-Run scripts/check-endpoints.sh and include its output in your summary.
+執行 scripts/check-endpoints.sh，並將輸出納入摘要。
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Skill 是一種 control，但屬於 advisory control。它讓 Claude 在寫 code 時很可能套用 policy，但沒有任何東西強制 session 一定 comply。必須永遠成立的 policy，需要在 skill 背後再加上一個 deterministic 機制，例如 block action 的 hook，或在 PR 階段重新檢查 policy 的 review pass。Skill 讓 violations 變得罕見，而 hook 則讓 violations 幾乎不可能發生。Skill invocations 會記錄在 session traces 中，而 policy owner 會像 review code 一樣 review skill changes。
+Skill 是一種控管措施，不過屬於建議性質。它提高 Claude 在撰寫程式碼時套用政策的可能性，但沒有任何機制強迫工作階段遵守。必須始終成立的政策，需要 skill 背後有確定性的機制支撐，例如阻擋動作的 hook，或在 PR 中重新檢查政策的審查程序。Skill 讓違規變得少見，hook 則讓違規接近不可能。Skill 的呼叫會記錄於工作階段追蹤紀錄中，政策負責人則像審查程式碼一樣審查 skill 變更。
 
-### Hooks 作為 build-time guardrails
+#### 如何衡量
 
-Skill 是 advisory control，而 [hook](https://code.claude.com/docs/en/hooks) 則是背後的 deterministic layer。Claude 在 implementation 過程中的大部分 actions 都是 file edits 與 shell commands，因此 build phase 往往也是 hooks 最常觸發的地方。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 從政策負責人核准政策變更，到更新後的 skill 合併所需的時間，資料來自 skill 資料夾的 PR。 |
+| 落後指標 | PR 審查中引用該政策的問題發現數量；當 skill 已在撰寫程式碼時套用政策，這個數字應逐漸趨近零。若沒有趨近零，可能是 skill 沒有觸發，或其文字已偏離正式政策。 |
 
-Build-phase hooks 可以：
+### 以 Hooks 作為建置時的防護措施
 
-- Block 對 protected paths 的 edits，例如 generated classes 或 frozen package；
-- 在 file edits 後執行 formatter 與 linter，讓 drift 永遠不會累積；
-- 防止 credentials 進入 diff。
+Skill 是建議性的控管措施，而 [hook](https://code.claude.com/docs/en/hooks) 是其背後的確定性層。Claude 的大多數動作，是實作期間的檔案編輯與 shell 命令，因此建置階段往往是 hooks 最常觸發的地方。
 
-任何必須無條件成立的 skill policy，都應該用 hook 支撐。Hook 會在每個符合條件的 action 上執行，因此 build-phase hooks 應該快速，且 scope 限定於 changed file。較重的 checks，例如完整 test suite，應該放在 commit 或 PR 階段。
+建置階段的 hooks 可以：
 
-如果 hook 會要求 human approval，它就應該屬於 Stage 5: Deploy 的 gates，因為 build 過程中的 approval prompt 會重新把人放回所有 parallel sessions 的 critical path 上。
+- 阻擋對受保護路徑的編輯，例如產生的 classes 或已凍結的 package；
+- 在檔案編輯後執行 formatter 與 linter，避免偏差持續累積；
+- 防止憑證進入 diff。
 
-### Parallel sessions 與 subagents
+任何政策必須毫無例外地成立的 skill，都應有 hook 支撐。Hook 會在每個符合條件的動作上執行，因此建置階段的 hooks 應該快速，並將範圍限定在變更的檔案。完整測試套件等較重的檢查，應放在 commit 或 PR 時執行。
 
-一名 engineer 可以同時推動多個 work streams。
+需要向人類請求核准的 hook，應歸入第 5 階段：部署的關卡，因為在建置期間要求核准，會讓人類重新成為所有平行工作階段關鍵路徑上的必要環節。
 
-Parallel session 是另一個完整的 Claude Code instance，在自己的 [git worktree](https://code.claude.com/docs/en/worktrees) 中執行不同 task。每一個獨立 session 彼此完全不知道對方的存在，它們唯一共用的就是負責 steering 它們的 engineer。
+### 平行工作階段與 subagents
 
-[Subagent](https://code.claude.com/docs/en/sub-agents) 則是在單一 session 內執行的 scoped helper，擁有自己的 context window 與 tool limits，適合那些會在多個 tasks 中重複出現的 jobs，例如驗證 app 是否如預期運作。
+一位工程師可以同時推進多條工作線。
 
-Parallel sessions 提高一名 engineer 可以同時進行的 tasks 數量，而 subagents 則讓每個 session 能專注在自己的 task。Engineer 的工作，是 steering 並 reviewing 所有這些 sessions。
+平行工作階段是另一個完整的 Claude Code instance，在自己的 [git worktree](https://code.claude.com/docs/en/worktrees) 中處理獨立任務。每個獨立工作階段都不知道其他工作階段的情況，唯一的共同點就是引導它們的工程師。
+
+[Subagent](https://code.claude.com/docs/en/sub-agents) 在單一工作階段內執行，作為限定範圍的助手，擁有自己的 context window 與工具限制，適合在多項任務中重複出現的工作，例如驗證應用程式是否如預期執行。
+
+平行工作階段提高工程師能同時推進的任務數量，而 subagents 則讓每個工作階段專注於自己的任務。工程師的工作是引導並審查所有工作。
+
+| 傳統 | AI-native |
+|---|---|
+| 一位工程師一次處理一項任務，每天或每週有很大一部分時間花在 build、test 與等待審查者。等待時雖然可以切換任務，但切換 context 相當耗神，因此很少有人選擇這麼做。 | 一位工程師同時執行多個 Claude 工作階段，每個階段在自己的 worktree 中處理各自的任務。重複性工作則成為擁有獨立 context 與工具限制的 subagents。工程師的工作轉向協調，最終轉向建立與監控循環。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | `CLAUDE.md`，因為所有工作階段都會讀取它。第 4 階段：測試中的回饋循環也有幫助，因為當工作階段能驗證自己的工作時，工程師所需的監督就更少。 |
+| 基礎設施 | 一個 git repository，因為隔離來自 worktrees；以及經過調整的權限設定，讓工作階段不必為組織認定安全的命令等待核准提示。 |
 
 #### 如何執行
 
-1. Engineer 利用 plan mode play（Stage 3: Build）所產生的 plan，將工作拆成會碰觸不同 files 的 tasks，藉此找出哪些工作是獨立的。會修改相同 files 的 tasks 則放在同一 session 中，依序執行。
-2. 每個 parallel task 都建立自己的 worktree，例如在一個 terminal 執行 `claude --worktree feature-auth`，另一個則執行 `claude --worktree fix-rate-limit`。Worktree 是位於獨立 branch 上的 separate checkout，可避免 sessions 在 files 上互相衝突。
-3. 一開始使用兩到三個 sessions 是合理的。實際上限取決於一個人能夠妥善 review 幾條 streams，因此只有在 review 還跟得上的情況下才增加 sessions。
-4. 將重複 jobs 轉成 subagents，定義於 `.claude/agents/` 中的 markdown files。每個 subagent 都有 name、何時使用的 description，以及它可以使用的 tools。例如：在 main agent 完成後移除不必要 complexity 的 code simplifier、啟動 app 並檢查 behavior 的 verifier、探索 codebase 並回報結果而不讓 main context 被塞滿的 researcher。將 definitions check into git，讓整個 team 共用。
+1. 工程師將工作拆成會修改不同檔案的任務，並利用第 3 階段：建置中 plan mode 實踐方法產出的計畫，判斷哪些工作彼此獨立。會共用檔案的任務，則在同一個工作階段中依序執行。
+2. 每項平行任務都有自己的 worktree，例如在一個 terminal 中執行 `claude --worktree feature-auth`，在另一個 terminal 中執行 `claude --worktree fix-rate-limit`。Worktree 是位於自己 branch 上的獨立 checkout，能避免工作階段在檔案上互相衝突。
+3. 以兩到三個工作階段作為起點是合理的。實際上限取決於一個人能妥善審查多少條工作線，因此，只有在審查跟得上的情況下，才增加工作階段。
+4. 將重複性工作轉為 subagents，透過 `.claude/agents/` 中的 Markdown 檔案定義。每個 subagent 都包含名稱、使用時機描述，以及允許使用的工具。例如：在主要 agent 完成後移除不必要複雜度的 code simplifier、執行應用程式並檢查行為的 verifier，以及探索 codebase 並回報、卻不塞滿主要 context 的 researcher。將定義提交至 git，讓整個團隊共用。
 
-#### 實際長什麼樣子（.claude/agents/verifier.md）
+#### 實際樣貌（.claude/agents/verifier.md）
 
-```javascript
+```markdown
 ---
 name: verifier
-description: Runs the app and checks the change works before the session
-  reports done
+description: 在工作階段回報完成之前，執行應用程式並檢查變更是否有效
 tools: Bash, Read
 ---
-Start the app with make run. Exercise the changed behavior and the two
-nearest neighboring flows. Report what you ran, what you saw, and any
-behavior that does not match plan.md. Do not fix anything; report only.
+使用 make run 啟動應用程式。實際操作變更後的行為，以及兩個最接近的相鄰流程。
+回報你執行了什麼、看到了什麼，以及任何不符合 plan.md 的行為。
+不要修正任何內容；只回報。
 ```
 
-#### Governance considerations
+#### 治理考量
 
-更多 sessions 意味著更多 output，因此 controls 必須來自 repo 中的 configuration。Hooks 與 permission settings 會套用到所有 sessions，而 session 做過的事情都會被記錄，並歸屬到執行它的 engineer。
+更多工作階段意味著更多產出，因此控管措施必須來自 repo 中的設定。那裡的 hooks 與權限設定會套用至所有工作階段，而工作階段所做的事情都會記錄，並歸屬於執行它的工程師。
 
-### 給 Claude 一個 feedback loop
+#### 如何衡量
 
-永遠提供 Claude 一種驗證自己工作的方式，無論是 tests、build，或 screenshot diff。Session 應該先自行檢查工作並修正錯誤，再讓 engineer 看到結果。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 在維持審查品質的前提下，每位工程師的同時執行工作階段數量，從 OpenTelemetry 匯出資料計算；以及一天中花在引導而非等待的時間比例。 |
+| 落後指標 | 每位工程師每週合併的變更數量，並搭配 PR 歷史所呈現的返工率一起觀察。 |
 
-Feedback loop 不應該與 verifier subagent（Stage 3: Build）混淆。Feedback loop 會在整個 task 執行期間反覆運作，次數可能和工作的迭代次數一樣多。另一方面，verifier subagent 則是一種將 final check 包裝成獨立步驟的方法：當 session 認為工作已完成時，以 fresh context window 執行一次檢查。這樣 verdict 就不會受到產生 code 時那些 assumptions 的影響。
+## 第 4 階段——測試
+
+每個工作階段都在人類看到之前，先檢查自己的工作；引導 agent 的設定，也像它撰寫的程式碼一樣接受 regression testing。
+
+### 給 Claude 一個回饋循環
+
+始終提供 Claude 一種驗證自身工作的方法，無論是測試、build，還是螢幕截圖 diff。工作階段會在工程師看到之前，先檢查自己的工作並修正錯誤。
+
+不要將回饋循環與 verifier subagent 混為一談，後者見第 3 階段：建置。回饋循環貫穿整項任務，隨工作需要反覆執行。相較之下，verifier subagent 是封裝最終檢查的一種方式：當工作階段認為工作完成後，以全新的 context window 執行一次檢查。如此一來，判定結果就不會受到產生程式碼時所採用的假設影響。
+
+| 傳統 | AI-native |
+|---|---|
+| 程式碼是否能正常運作的訊號來得很晚。CI 在幾分鐘後、測試人員在幾天後、正式環境則在幾週後才提供訊號。當程式碼由 agent 產生時，訊號延遲意味著某個人必須檢查所有產出，而這個人就成了瓶頸。 | 工作階段被賦予方法，在人類看到之前檢查自己的工作。執行測試、執行 build、擷取螢幕截圖。Claude 持續迭代直到檢查通過，因此交到工程師手上的內容已通過檢查。建立循環是執行該工作階段的工程師的責任，以下步驟就是為他們撰寫的。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 無。 |
+| 基礎設施 | 一套測試與 build，兩者各自都能以單一命令在本機執行。對 UI 工作而言，讓 Claude 能看見結果非常重要，可以是 browser tool，或透過 MCP 串接的螢幕截圖工具。 |
 
 #### 如何執行
 
-1. 如果今天檢查工作的方式需要執行一連串 commands 加上一些 environment knowledge，就把它包裝成單一 target，例如 `make test` 或 `npm test`，且失敗時必須以 non-zero exit。
-2. 在 `CLAUDE.md` 的 Commands section 中列出每一個 command，並附上一個 healthy output 範例。
-3. 設定一個可量化的 target，讓 Claude 可以不用詢問你就自行驗證，例如：「`test_status.py` 中所有 tests 都通過」、「screenshot 與 attached mock 一致」，或「endpoint 使用 new field 回傳 200」。
-4. 對 bug fixes 而言，先寫 failing test。要求 Claude 將 bug 重現成 test，執行它，並確認它是因為你預期的原因失敗。Commit 該 test。只有在那之後，才要求 Claude 在不能修改 test 的情況下讓它通過，而 final step 中的 test-file hook 會強制這個限制。一個在 fix 前就已經存在、而且 agent 無法重寫的 test，就是 bug 已被修正的證明。
-5. UI work 則使用 visual check 關閉 loop。提供 Claude browser 或 screenshot tool，提供 mock，並讓它反覆迭代：implement、screenshot、compare、adjust。兩到三輪很常見，而且每一輪結果都應該變得更好。
-6. 讓 verification 成為「done」的一部分。Instruction 放在 `CLAUDE.md` 中。在回報 task 完成之前執行 tests，並顯示 output。
-7. 最後，loop 本身也需要被保護，因為修 code 的 agent 不能有能力弱化用來檢查該 code 的機制。可以用 hook 在 fix task 中 block 對 test files 的 edits。另一個方法是在 review 時檢查 diff，並拒絕任何修改 test 的 change。
+1. 如果目前檢查成果需要一連串命令與一些環境知識，就將它封裝成單一 target，例如 `make test` 或 `npm test`，並在失敗時以非零狀態碼結束。
+2. 在 `CLAUDE.md` 的 Commands 區段中，列出每個命令，以及正常輸出的範例。
+3. 明確提出可量化的目標，讓 Claude 不必詢問你也能檢查成果，例如：「`test_status.py` 中的所有測試都通過」、「螢幕截圖符合附上的 mockup」，或「endpoint 回傳 200，且包含新欄位」。
+4. 修復 bug 時，先撰寫會失敗的測試。請 Claude 將 bug 重現為測試、執行它，並確認它是因為你預期的原因而失敗。提交該測試。只有在這之後，才要求 Claude 在不編輯測試的情況下讓它通過，並由最後一步提到的測試檔案 hook 強制執行限制。一個在修復前就存在、而且 agent 無法改寫的測試，就是 bug 已消失的證據。
+5. 對 UI 工作，以視覺檢查完成閉環。提供 Claude browser 或螢幕截圖工具、提供 mockup，然後讓它反覆調整。實作、截圖、比較、調整。兩到三輪很正常，而且每一輪的結果都應有所改善。
+6. 將驗證納入「完成」的定義。指示存放於 `CLAUDE.md`。在回報任務完成之前，先執行測試並展示輸出。
+7. 最後，循環本身也需要保護，因為修正程式碼的 agent 不應能削弱對該程式碼的檢查。可透過 hook，在修復任務期間阻擋測試檔案編輯。另一種方式是在審查時檢查 diff，並拒絕任何修改測試的變更。
 
-#### 實際長什麼樣子（CLAUDE.md verification block）
+#### 實際樣貌（CLAUDE.md 驗證區塊）
 
-```javascript
-## Verifying your work
+```markdown
+## 驗證你的工作
 
-- Build: make build (must finish with "Build succeeded")
-- Test: make test (all green; never skip or delete a failing test)
-- Lint: make lint (zero warnings)
+- Build：make build（必須以 "Build succeeded" 結束）
+- Test：make test（全部通過；絕不跳過或刪除失敗的測試）
+- Lint：make lint（零警告）
 
-Run all three before reporting any task complete, and paste the output.
-If a test fails, fix the code, not the test.
+在回報任何任務完成之前，執行以上三項並貼上輸出。
+如果測試失敗，修正程式碼，不要修改測試。
 ```
 
-### CI 中的 Continuous evals
+#### 治理考量
 
-Evals 是 AI-native 版本的 stage-gate QA。實際上，它是一套每當 agent configuration 改變時就會執行的 suite。當切換新 model 或重新撰寫 prompt 時，eval suite 會指出 agent 是否仍然能以相同標準完成工作。
+| 項目 | 內容 |
+|---|---|
+| 強制執行什麼 | 在回報任務完成之前進行驗證，以及在修復期間禁止 agent 編輯測試檔案。當組織需要保證這兩點時，都以 hooks 實作。 |
+| 證據是什麼 | Claude 實際執行並貼上的 `make test` 原始輸出、build log，或螢幕截圖 diff，因此證據來自工具鏈。 |
+| 記錄在哪裡 | 工作階段逐字紀錄中，OpenTelemetry 匯出會將其轉送至組織的可觀測性系統；也會記錄於 PR 的 check run，讓審查者與日後的稽核人員都能看到。 |
+| 誰核准 | 審查 PR 的 code owner。由於機械性檢查的證據已附上，他們可以專注於意圖與風險。 |
 
-Evals 應被視為一套持續更新的 live suite。隨著 models 改善，過去能區分品質的 cases 會失去辨識力，因此必須根據持續 monitoring 中發生的新情況加入新的 cases。
+#### 如何衡量
 
-根據 use case，有些 teams 可能偏好依固定 cadence offline 執行 evals，而不是每次 change 都執行。以下 steps 針對 continuous evaluations。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | Agent 撰寫的變更首次執行 CI 的成功率，CI 系統已支援這項資料。 |
+| 落後指標 | 每個 PR 的審查時間，資料來自 PR metadata；當測試能捕捉過去由審查者發現的問題時，審查時間應下降。另追蹤事件追蹤系統中的變更失敗率。 |
+
+### 在 CI 中持續執行 evals
+
+Evals 是 AI-native 版本的階段關卡式 QA。實務上，這代表一套會在 agent 設定變更時執行的評估套件。替換新模型或改寫 prompt 時，eval suite 會判斷 agent 是否仍以相同標準完成工作。
+
+應將 evals 視為持續演進的套件。隨著模型改善，過去能區分表現的案例將不再具有區辨力，必須加入從持續監控中產生的新案例。
+
+視使用情境而定，有些團隊可能更傾向以固定頻率離線執行這些 evals，而不是每次變更都執行。以下步驟適用於持續評估。
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | `CLAUDE.md` 與回饋循環，見第 4 階段：測試。 |
+| 基礎設施 | 能以非互動方式執行 Claude Code 的 CI，以及具備 eval 執行預算的 API key。 |
 
 #### 如何執行
 
-1. Platform engineer 從最近的工作中收集 20 到 50 個 real tasks，以及它們預期／被接受的 outcome。
-2. 將每個 task 寫成 eval，也就是 prompt 加上定義 acceptable 的 checks（tests pass、lint clean、behavior unchanged、policy followed）。
-3. Suite 會以 non-interactive 方式在 CI 中依 schedule 執行，同時任何 `CLAUDE.md`、skills 或 hooks 的 change 也會觸發它，因為這些 configuration 會 steering agent，因此理應獲得和 code 相同的 regression testing。
-4. 使用結果作為 configuration changes 的 gate。若 skill change 導致 pass rate 下降，就必須在 merge 前 review。
-5. 每個 production incident 都應新增一個 eval，由負責該 incident 的 team 撰寫，並永久保留在 suite 中作為 regression test。
+1. 平台工程師從近期工作中蒐集 20 到 50 項真實任務，以及其預期／已接受的結果。
+2. 將每項任務寫成 eval，也就是 prompt 加上定義可接受結果的檢查：測試通過、lint 無問題、行為不變，以及遵循政策。
+3. 這套評估會以非互動方式在 CI 中定期執行，並在 `CLAUDE.md`、skills 或 hooks 有任何變更時執行，因為這些設定引導 agent，也應像程式碼一樣接受 regression testing。
+4. 根據結果把關設定變更。會降低通過率的 skill 變更，必須在合併之前接受審查。
+5. 每起正式環境事件都由負責該事件的團隊撰寫一項 eval，並留在套件中作為 regression test。
 
-#### 實際長什麼樣子（.github/workflows/agent-evals.yml）
+#### 實際樣貌（.github/workflows/agent-evals.yml）
 
 ```yaml
 name: Agent evals
@@ -390,7 +572,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm install -g @anthropic-ai/claude-code
-      - name: Run eval suite
+      - name: 執行 eval suite
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -402,65 +584,101 @@ jobs:
           done
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Evals 給 QA 一個可以跟上 agent output 的 gate。Pass-rate threshold 會被強制為 merge check，runs 會被記錄，因此 results 可以隨時間比較，而 configuration change 所屬的 team 負責核准它。
+Evals 為 QA 提供能跟上 agent 產出的關卡。通過率門檻以合併檢查強制執行，執行紀錄會保留，以便比較不同時間的結果，並由負責該設定變更的團隊核准。
 
-### PR review loop 中的 AI
+#### 如何衡量
 
-Claude 同時會給出 review，也會接收 review。它會根據組織的 policies review incoming PRs，並自行處理自己 PR 上的 review comments。如此一來，engineers 可以把 PR review 重點放在 behavior 上，本質上就是判斷 intent 與 risk。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | Eval 通過率隨時間的變化，由套件在每次執行時回報；以及正式環境事件轉為永久 eval 所需的時間。 |
+| 落後指標 | CI 捕捉到的 regressions，與事件追蹤系統所記錄、在正式環境才發現的 regressions 之比較。 |
+
+## 第 5 階段——部署
+
+審查雙向進行，治理在 agent 行動時落實。Agent 可以完成正式環境關卡之前的所有事情，但不能越過它。
+
+### PR 審查循環中的 AI
+
+Claude 既提供審查，也接受審查。它會根據組織政策審查送來的 PR，也會處理自己 PR 上的審查留言。這讓工程師在 PR 審查中能專注於行為，歸根究柢就是判斷意圖與風險。
+
+| 傳統 | AI-native |
+|---|---|
+| 審查量能依照人類產出規劃。PR 等待審查者讀完整份內容，審查品質隨審查者負荷而變動，而作者隨著 backlog 增長不斷催促。 | 所有 PR 都接受相同的一組審查程序，並依嚴重程度排列發現的問題。人類的注意力提升一個層次，關注變更是否實現計畫意圖，以及風險是否可接受。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 第 3 階段：建置中已更新的 `CLAUDE.md`；若審查程序需要落實書面政策，則需要 skills；以及已定義的 subagents。 |
+| 基礎設施 | 已安裝 Claude 整合的 repo，可以是由管理員啟用的代管 Code Review 服務（research preview），或在自己的 CI 中執行 claude-code-action，並視需要透過 AWS Bedrock、Google Vertex 或 Microsoft Foundry 呼叫模型。CI/CD 實踐方法會涵蓋部署選項。要求 code owner 核准的 branch protection 政策也很值得採用。 |
 
 #### 如何執行
 
-1. Managed Code Review service 是最快的起點。Admin 啟用它並選擇 repositories。當你需要控制 pipeline，或希望 API calls 經由自己的 cloud agreement 路由時，則透過 claude-code-action 在自己的 CI 中執行 review（CI/CD play 會介紹這些 plumbing）。
-2. Tech lead 在 repo root 建立 `REVIEW.md` 作為 review policy，依照組織關心的 passes 分類：bugs 與 logical errors；security 與 vulnerabilities；與 spec（requirements play 的 `spec.md`）、implementation plan（plan mode play 的 `plan.md`）以及 design principles 的 compliance。`REVIEW.md` 也定義什麼算 Important、什麼只是 Nit，以及哪些內容應該 skip。
-3. Tech lead 設定 human threshold。Findings 本身不會 approve 或 block PR，branch protection 仍然要求 code owner approval。如果 platform engineer 希望依據 findings gate merges，可以讀取 check run 發布的 severity counts，這是一份 machine-readable tally。
-4. 當 reviewer 或 author 在 review comment 中 tag `@claude`，Claude 會處理 comment 並 push fix。PR thread 會同時記錄 request 與 change。這個 fix loop 透過 claude-code-action 運作。在 managed service 中，comment `@claude review` 則會要求重新執行 review。對 Claude 自己開啟的 PR，可以再往前一步，讓 Claude babysit PR 直到 merge。Teams 會將這個 loop 包裝成 custom slash command，掃描 PR 上 unresolved review comments 與 failing checks，處理它們並 push fixes，直到 PR 變成 green，只剩下等待 code owner approval。
-5. Review findings 回饋到 `CLAUDE.md`。當 review 第二次標記同樣的錯誤時，就在該 review 中將 correction 加入 `CLAUDE.md`，而因為 review 也會讀取 `CLAUDE.md`，所以從下一個 PR 開始就會抓到這個錯誤。Review 也會在 change 造成 `CLAUDE.md` outdated 時提出警告。
-6. 每個月 tech lead 調整一次 setup：評分 findings 以改善 reviewer，並在 `REVIEW.md` 中限制 Nit 數量。Generated paths 與任何 CI 已經 enforce 的項目都會被排除。
+1. 代管 Code Review 服務是最快的起點。管理員啟用服務並選擇 repositories。若需要控制 pipeline，或希望 API 呼叫透過自己的雲端合約進行，就使用 claude-code-action 在自己的 CI 中執行審查；CI/CD 實踐方法會說明相關串接。
+2. 技術主管在 repo 根目錄撰寫 `REVIEW.md` 作為審查政策，並依組織關注的項目分成不同審查程序：bug 與邏輯錯誤；安全與漏洞；是否符合規格，也就是需求實踐方法中的 `spec.md`、實作計畫，也就是 plan mode 實踐方法中的 `plan.md`，以及設計原則。`REVIEW.md` 也定義哪些問題屬於 Important、哪些屬於 Nit，以及哪些內容應略過。
+3. 技術主管設定人類介入的門檻。審查發現本身不會核准或阻擋 PR，branch protection 仍要求 code owner 核准。若平台工程師希望根據審查發現把關合併，可以讀取 check run 發布的各嚴重程度數量，這些資料以機器可讀格式提供。
+4. 當審查者或作者在審查留言中標記 `@claude`，Claude 會處理留言並 push 修正。PR 討論串會同時記錄請求與變更。這個修正循環透過 claude-code-action 執行。在代管服務中，留言 `@claude review` 則是要求重新審查。對 Claude 建立的 PR，可以更進一步，讓 Claude 持續照看直到合併。團隊會以自訂 slash command 封裝這個循環，掃描 PR 上尚未解決的審查留言與失敗檢查，處理後 push 修正，直到 PR 全部通過，只剩等待 code owner 核准。
+5. 審查發現會回饋至 `CLAUDE.md`。当某個錯誤第二次在審查中被指出，就將修正指示納入 `CLAUDE.md`，作為該次審查的一部分；由於審查會讀取 `CLAUDE.md`，從下一個 PR 開始就能捕捉這個錯誤。審查也會標記哪些變更已使 `CLAUDE.md` 過時。
+6. 技術主管每月調校一次設定，透過評分審查發現來改善審查者表現，並在 `REVIEW.md` 中限制 Nit 數量。產生的檔案路徑，以及 CI 已強制執行的事項，均排除在外。
 
-#### 實際長什麼樣子（REVIEW\.md）
+#### 實際樣貌（REVIEW.md）
 
 ```markdown
-# Review instructions
+# 審查指示
 
-## Passes
-Run three passes and tag each finding with its pass:
-- Bugs: logic errors, broken edge cases, subtle regressions
-- Security: injection risks, authentication gaps, PII in logs
-- Compliance: the change matches spec.md, plan.md and our design principles
+## 審查程序
+執行三輪審查，並為每項發現標記所屬程序：
+- Bugs：邏輯錯誤、失效的邊界情況、細微的 regressions
+- Security：injection 風險、身分驗證缺口、logs 中的 PII
+- Compliance：變更符合 spec.md、plan.md 與我們的設計原則
 
-## What Important means here
-Reserve Important for findings that would break behavior, leak data
-or breach a policy. Style and naming are nits.
+## 這裡的 Important 代表什麼
+Important 僅用於會破壞行為、洩漏資料或違反政策的問題。
+風格與命名屬於 nits。
 
-## Cap the nits
-Report at most five nits per review; summarize the rest as a count.
+## 限制 nits
+每次審查最多回報五個 nits；其餘以數量摘要呈現。
 
-## Do not report
-Generated files under src/gen/ and anything CI already enforces.
+## 不要回報
+src/gen/ 下的產生檔案，以及任何 CI 已強制執行的事項。
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Separation of duties 會被保留，因為撰寫 code 的 agent 無法 approve 自己的 code。`REVIEW.md` 中的 review policy 會套用到所有 PRs，而且 findings、fixes、ratings 與 approvals 都會記錄在 PR history 中，因此 PR 本身就是 audit record。Approval 由 human 透過 branch protection 提供，並參考 findings 做出決策。
+職責分離得以保留，因為撰寫程式碼的 agent 無法核准自己的程式碼。`REVIEW.md` 中的審查政策套用至所有 PR，而審查發現、修正、評分與核准都記錄在 PR 歷史中，因此 PR 就是稽核紀錄。核准由人類依據審查發現，透過 branch protection 給予。
 
-如要了解這些 controls 在 production scale 下如何組合，請參閱 [securing an AI-native SDLC at Anthropic](https://claude.com/blog/how-anthropic-secures-its-ai-native-software-development-lifecycle)。
+若要了解這些控管措施如何在正式環境規模下共同運作，請參閱 [Anthropic 如何確保 AI-native SDLC 的安全](https://claude.com/blog/how-anthropic-secures-its-ai-native-software-development-lifecycle)。
 
-### Hooks 作為 approval gates
+#### 如何衡量
 
-Build phase 使用 hooks 作為 guardrails，在沒有人類介入的情況下 allow 或 block actions（Stage 3: Build）。Hook 也可以要求 approval，在特定 person 核准之前暫停 action，而這正是 release gating 所需要的功能。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 首次審查所需時間，應縮短至數分鐘；以及未經人類修改 branch 就解決的審查留言比例，資料直接儲存在 Git 中。 |
+| 落後指標 | 合併前捕捉到的缺陷與漏洞，與漏至正式環境的缺陷與漏洞之比較，資料來自 PR 歷史與事件追蹤系統。 |
 
-這個 play 被放在 Stage 5: Deploy，因為 release gate 是最清楚的案例，但 hooks 並不限於 deploy：Claude 在任何地方執行 action 時都能觸發。例如，在 Stage 3: Build，hooks 可以 block 沒有 change ticket 的 migration 與 infra edits；在 Stage 4: Test，則能在 fix task 中阻止 agent 修改 test files。
+### 以 Hooks 作為核准關卡
+
+建置階段使用 hooks 作為防護措施，在沒有人類介入的情況下允許或阻擋動作，見第 3 階段：建置。Hook 也可以提出核准請求，在特定人員核准之前暫停動作，這正是發布關卡所需的能力。
+
+這項實踐方法位於第 5 階段：部署，因為發布關卡是最清楚的案例，但 hooks 並非部署專用：只要 Claude 行動，就能執行。例如，在第 3 階段：建置中，hooks 可以在缺少變更工作單時阻擋 migrations 與基礎設施的編輯；在第 4 階段：測試中，則能阻止 agent 在修復任務期間編輯測試檔案。
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | 無。 |
+| 基礎設施 | 一份書面清單，列出變更流程所要求的核准。 |
 
 #### 如何執行
 
-1. Engineering leadership 與 change management、compliance 一起列出必須保留的 human approval gates，例如 change management sign-off、release authorization，以及 protected paths 的 edits。
-2. Platform engineer 將每個 gate 表達為 hook，也就是 Claude action 執行前會觸發的 script，並可以 allow、ask 或 block。
-3. Team hooks 放在 git 中的 `.claude/settings.json`，不可妥協的 hooks 則放進由 platform 或 IT admin 管理的 managed settings，individual engineers 無法將其關閉。
-4. Block 應該能解釋原因，因此當 hook 阻止 action 時，Claude output 中會同時顯示原因與取得 approval 的途徑。
+1. 工程主管與變更管理、合規人員共同列出必須保留的人類核准關卡，例如變更管理簽核、發布授權，以及受保護路徑的編輯。
+2. 平台工程師將每個關卡表達為 hook，也就是在 Claude 行動前執行、可允許、詢問或阻擋動作的 script。
+3. 團隊 hooks 放在 git 中的 `.claude/settings.json`，不可妥協的 hooks 則放在平台或 IT 管理員持有的 managed settings 中，個別工程師無法將其關閉。
+4. 阻擋應該能說明自身原因，因此，當 hook 停止一項動作時，原因與取得核准的途徑都會出現在 Claude 的輸出中。
 
-#### 實際長什麼樣子（.claude/settings.json）
+#### 實際樣貌（.claude/settings.json）
 
 ```json
 {
@@ -478,78 +696,191 @@ Build phase 使用 hooks 作為 guardrails，在沒有人類介入的情況下 a
 }
 ```
 
-#### Gate 本身（.claude/hooks/production-gate.sh）
+#### 關卡本身（.claude/hooks/production-gate.sh）
 
 ```bash
 #!/bin/bash
-# Production deploys require a named release authorization
+# 正式環境部署需要具名的發布授權
 cmd=$(jq -r '.tool_input.command' < /dev/stdin)
 if [[ "$cmd" == *"deploy"* && "$cmd" == *"production"* ]]; then
    if [ -z "$RELEASE_APPROVAL" ]; then
-     echo "Production deploys need a release authorization." >&2
-     exit 2 # exit 2 blocks the action; the message goes to Claude
+     echo "正式環境部署需要發布授權。" >&2
+     exit 2 # exit 2 會阻擋動作；訊息會傳給 Claude
    fi
 fi
 exit 0
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Hooks 就是 approval gates。Gate condition 每一次、對每一個人都會被 enforce。Allow 與 block decisions 會和 timestamp 一起被記錄。Gate 也定義了什麼算 approval，無論是 approved change ticket，或 release manager 的 sign-off。
+Hooks 就是核准關卡。關卡條件每次都會執行，對所有人都適用。允許與阻擋的決策會附帶時間戳記記錄。關卡也定義什麼才算核准，無論是已核准的變更工作單，或發布經理的簽核。
 
-### CI/CD integration 與 deployment
+#### 實作範例：受監管企業的 managed settings
 
-在 CI/CD pipeline 內以 non-interactive 方式執行 Claude Code，將 execution sandbox 化，讓 long-running agents 能安全執行，透過 MCP integrations 暴露 deployment，並在 agent 真正需要使用 rollback path 之前先演練它。
+由平台團隊透過 MDM 或管理主控台部署；工程師無法編輯或覆寫其中任何設定。
 
-#### 如何執行
-
-1. Platform engineer 從 read-only judgment steps 開始。在 pipeline job 中使用 `claude -p`，處理 failed build triage、summarize flaky test，或草擬 changelog。
-2. 在現有 gates 之後加入 write steps，用來處理例如 fix lint、update generated docs，或透過 `@claude` mentions 處理 review comments 等 jobs。任何 agent 寫入的內容都必須透過 branch protection 以 PR 方式進入，而 agent 沒有任何直接 push 到 main 的路徑。
-3. Execution 必須 sandboxed。Agent jobs 在受 network policy 管理的 containers 中執行，使用 short-lived scoped tokens，且預設不持有 production credentials。
-4. 透過 MCP 暴露 deployment。Deploy、status 與 rollback 會成為 tools，並依 environment 限定 scope，因此 agent 的 deployment powers 會是 allowlist，而不是一支帶 credentials 的 shell script。
-5. 根據 environment 分級 autonomy。在 development，agent 可以自由 deploy。在 production，agent 準備 release，而 release manager 負責 authorize，並由 hook enforce production gate。Staging 則位於兩者之間。
-6. Rollback 應該是 pipeline 中演練最多的 path，一條 agent 可以執行的 single command，並定期在 staging 中 exercise。Closing the loop play（Stage 6: Maintenance）會在 control band breach 時呼叫這個 rollback，因此必須事先證明它能正常工作。
-
-#### 實際長什麼樣子（pipeline step）
-
-```markdown
-- name: Triage failed build
-  if: failure()
-  run: >
-    claude -p "Read the build log at out/build.log. Identify the most
-    likely cause, say whether the failure looks flaky or real, and write a
-    three-line summary for the PR thread." >> triage.md
+```json
+{
+  "permissions": {
+    "deny": [
+      "Read(.env*)", "Read(./secrets/**)",
+      "WebFetch", "Bash(curl *)", "Bash(wget *)"
+    ],
+    "allow": [
+      "Bash(git *)", "Bash(make build)",
+      "Bash(make test)", "Bash(make lint)"
+    ],
+    "disableBypassPermissionsMode": "disable"
+  },
+  "allowManagedPermissionRulesOnly": true,
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowedDomains": [
+        "git.internal.example.com",
+        "registry.npmjs.org"
+      ]
+    },
+    "credentials": {
+      "files": [
+        { "path": "~/.ssh", "mode": "deny" },
+        { "path": "~/.aws/credentials", "mode": "deny" }
+      ],
+      "envVars": [
+        { "name": "GITHUB_TOKEN", "mode": "deny" }
+      ]
+    }
+  },
+  "allowManagedHooksOnly": true,
+  "disableSideloadFlags": true,
+  "allowManagedMcpServersOnly": true,
+  "strictKnownMarketplaces": [
+    {
+      "source": "github",
+      "repo": "example-corp/approved-plugins"
+    }
+  ],
+  "requiredMinimumVersion": "2.1.193"
+}
 ```
 
-#### Governance considerations
+**每一行提供了哪些控管能力**
 
-核心治理原則是：agent 可以一路行動到 production gate，但無法跨過它。以下 controls 會 enforce 這項原則。
+`permissions.deny` 防止 secrets 進入 agent 的 context，並阻擋透過工具任意對外連線；`permissions.allow` 預先核准安全的內部工作循環，避免 deny 清單造成反覆核准提示的疲勞。
 
-- Branch protection 會把 agent 寫入的任何東西都轉成 PR，不存在直接進入 main 的路徑。
-- Production deploy hook 會 block release，直到指定的 release manager authorize。每個 non-interactive run 都以 agent 自己的 identity 執行，因此 pipeline log 能清楚區分 agent 做了什麼，以及觸發它的 engineer 做了什麼。
-- Per-environment permission tiers 會設定 agent 在抵達 gate 前能執行到什麼程度。
+`disableBypassPermissionsMode` 加上 `allowManagedPermissionRulesOnly`，表示任何工程師、專案檔案或 command-line flag 都無法放寬規則。
 
-### Maintenance 與 closing the loop
+`sandbox` 補上 permissions 無法涵蓋的缺口。在工具層級禁止 WebFetch，無法阻止 shell 命令存取網路；OS 層級的網域 allowlist 則直接阻擋對外連線。
 
-到目前為止，我們討論的是如何將 Claude 加入 SDLC process 的每一個 stage，每個 stage 都需要由 human 啟動初始 steps。不過這個 stage 會將焦點轉向 Claude 的 autonomous running，用來 closing the loop。
+`failIfUnavailable` 與 `allowUnsandboxedCommands` 讓 sandbox 成為一道關卡：當 sandbox 無法初始化時，Claude Code 會拒絕啟動；在 sandbox 內失敗的命令，也無法在其外部重試。
 
-例如，一個 continuously running monitoring agent 可以在 bug ticket 被建立後，自動建立 `intent.md`，接著依序流經 requirements、plan、build、test 與 review phases。Stage 6: Maintenance 以 headless 模式執行，各 stages 之間有 independent confidence gate，由 deterministic check 或 adversarial reviewing agent 判斷上一個 stage 的 output 是否可以繼續，還是需要 escalate 給 human。
+`credentials` 補上 deny 規則留下的缺口。`permissions.deny` 管控的是 Claude 的檔案工具，但在預設情況下，sandbox 中的 shell 命令仍可能讀取 `~/.ssh` 或 `~/.aws/credentials`；這個區塊會拒絕這些讀取，並從每個 sandbox 命令的環境中移除指定的 secrets。
 
-### Closing the loop
+`allowManagedHooksOnly` 表示這項實踐方法中的核准關卡，是唯一會執行的 hooks；本機的任何設定都無法新增或取代它們。
 
-Deterministic script 會監看 production，並在 control band 被突破時 invoke Claude。監控 breach 是 autonomous loop pattern 的一個有用範例，而本 stage 最後的 [Claude Tag](https://claude.com/product/tag)（public beta）section，則會介紹透過不同 channels 進入的工作。
+`disableSideloadFlags` 與 `strictKnownMarketplaces` 表示，工程師機器上的每個 skill、agent、hook 與 MCP server，都必須透過組織核准的 plugin marketplace 取得，絕不來自家目錄。
+
+`allowManagedMcpServersOnly` 讓 agent 可使用的工具集合，成為由平台團隊管理的 allowlist。
+
+`requiredMinimumVersion` 會拒絕在低於核准最低版本的版本上啟動，確保控管措施由組織實際評估過的 build 強制執行。
+
+請將以上內容視為可供調整的起點，而非建議直接複製的設定。每一項 deny 都會犧牲部分能力，而適當的平衡取決於 repo 的資料分類。設定參考文件說明了每個 key，包括僅限 managed settings 使用的項目：[code.claude.com/docs/en/settings](https://code.claude.com/docs/en/settings)。
+
+#### 如何衡量（針對 hooks 本身）
+
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 每個核准關卡的等待時間。每項 hook 決策都會寫入 OpenTelemetry 匯出資料，附帶時間戳記，以及允許或阻擋的判定，因此可以看見各關卡的等待時間。 |
+| 落後指標 | 導入 hooks 前後，違反關卡規則卻仍進入正式環境的情況，資料來自事件追蹤系統。 |
+
+### CI/CD 整合與部署
+
+在 CI/CD pipeline 中以非互動方式執行 Claude Code，將執行環境置於 sandbox，讓長時間執行的 agents 能安全運作，透過 MCP 整合提供部署能力，並在 agent 真正需要之前，先演練 rollback 路徑。
+
+| 傳統 | AI-native |
+|---|---|
+| Pipelines 執行確定性的 scripts，凡是需要判斷的事情，都等待人類處理。例如，研判不穩定測試、撰寫 changelog，或查明 build 為何失敗。部署與 rollback 是人類在壓力下遵循的 runbooks。 | Claude 在 pipeline 中，以非互動方式執行需要判斷的步驟，並在 sandbox 中使用限定範圍的憑證。部署工具透過 MCP 提供給 agent，因此撰寫並測試變更的同一套 workflow，也能在組織依環境定義的關卡內發布與 rollback。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | PR 審查循環中的 Claude，以及作為核准關卡的 hooks，因為在自動化加速任何工作通過關卡之前，關卡必須先存在。 |
+| 基礎設施 | 已安裝 claude-code-action 的 CI 平台，或任何能呼叫 `claude -p` 的 runner；透過 API 存取模型，或當流量必須納入組織雲端合約時，使用 Bedrock、Foundry 或 Vertex；部署目標的 MCP servers；以及不持有常駐正式環境憑證的 agent 工作 sandbox 設定。 |
 
 #### 如何執行
 
-1. Service owner 或 platform engineer 選擇一個具有穩定 rolling baseline 的 metric，例如 CI test failure rate、post-deploy 5xx rate，或 PR cycle time。
-2. 他們撰寫 detection script，通常是 rolling window 的 mean 與 standard deviation，加上 rules（Western Electric 或類似規則），讓 bands 不只能抓 spikes，也能抓 slow drift。Script 必須 version controlled 且 unit tested，而 detection 全程保持 deterministic，不涉及任何 model。
-3. 在 version-controlled config（如下方 `bands.yaml`）中定義 response tiers。1σ 時 script 只 log；2σ 時 invoke Claude 進行 read-only diagnosis；3σ 時 Claude 可以採取 action，但只能透過開啟 PR 進入 review gate，或觸發 pre-approved runbook。
-4. Trigger layer 可以是 GitHub 或 GitLab 的 scheduled workflow、來自現有 monitoring stack 的 webhook，或 network 內部的 Cron Job。Claude 以 stateless 方式執行，可以是 CI runner 上的 non-interactive step，也可以是 sandboxed container 中的 Agent SDK service，而 CI/CD play 會涵蓋 deployment 與 model-access options。因為 run 是 stateless 且 non-interactive，因此 loop 可以在沒有人啟動的情況下開始與結束。
-5. Agent 會依照 Stage 1: Plan format 將 diagnosis 寫成 `intent.md`，涵蓋 anomaly 與其 evidence、proposed outcome、affected systems，以及任何 open questions。從這裡開始，finding 會像其他任何事情一樣進入 pipeline。
-6. Service owner 或 on-call engineer triage queue，並將 product-facing findings 路由給 product owner。Fix now、schedule 或 dismiss。Dismissals 會用來調整 bands，並協助降低 noise。
-7. Fix ship 後，為該 incident 新增一個 eval（continuous evals play），確保這類問題未來受到保護。
+1. 平台工程師從唯讀的判斷步驟開始。在 pipeline 工作中使用 `claude -p`，研判失敗的 build、摘要不穩定測試，或草擬 changelog。
+2. 在既有關卡後方加入寫入步驟，例如修正 lint、更新產生的文件，或透過 `@claude` 標記處理審查留言。Agent 寫入的任何內容，都會透過 branch protection 以 PR 形式進入流程，agent 沒有任何途徑直接 push 至 main。
+3. 執行環境置於 sandbox。Agent 工作在受網路政策約束的 containers 中執行，使用短效且限定範圍的 tokens，預設不持有正式環境憑證。
+4. 透過 MCP 提供部署能力。部署、狀態查詢與 rollback 都成為工具，並依環境限定範圍，使 agent 的部署權限成為 allowlist，而非一份帶有憑證的 shell script。
+5. 依環境劃分自主程度。在開發環境，agent 可自由部署。在正式環境，agent 準備發布，由發布經理授權，再由 hook 強制執行正式環境關卡。Staging 則位於兩者之間。
+6. Rollback 應是 pipeline 中演練最充分的路徑：一個 agent 能執行的單一命令，且會定期在 staging 中演練。第 6 階段：維護中的完成閉環實踐方法，會在突破控制區間時呼叫這個 rollback，因此必須事先證實可用。
 
-#### 實際長什麼樣子（例如監控 CI test failure rate 的 bands.yaml）
+#### 實際樣貌（pipeline 步驟）
+
+```yaml
+- name: 研判失敗的 build
+  if: failure()
+  run: >
+    claude -p "閱讀 out/build.log 中的 build log。找出最可能的原因，
+    說明這次失敗看起來是不穩定問題還是真正的故障，
+    並為 PR 討論串撰寫三行摘要。" >> triage.md
+```
+
+#### 治理考量
+
+治理原則是：agent 可以執行到正式環境關卡之前，但不能越過它。以下控管措施會強制落實這項原則。
+
+- Branch protection 讓 agent 寫入的任何內容都成為 PR，沒有直接進入 main 的途徑。
+- 正式環境部署 hook 會阻擋發布，直到具名的發布經理授權。每次非互動式執行都使用 agent 自己的身分，因此 pipeline log 能區分哪些動作由 agent 執行，哪些由觸發它的工程師執行。
+- 各環境的權限分級，決定 agent 在抵達關卡之前能做多少事情。
+
+#### 如何衡量
+
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 不需呼叫人類處理，就能完成初步研判的 pipeline 失敗比例，資料來自 CI/CD pipeline logs。 |
+| 落後指標 | DevOps Research and Assessment（DORA）指標，CI 系統與部署工具已會輸出這些資料。 |
+
+## 第 6 階段——維護
+
+循環完成閉合。觸發機制呼叫 Claude，呼叫路徑中不需要任何人介入，而其發現會以 `intent.md` 重新進入 pipeline。
+
+### 維護與完成閉環
+
+到目前為止，我們討論了如何在 SDLC 流程的每個階段加入 Claude，而且每個階段都需要人類啟動最初的步驟。然而，這個階段會將焦點轉向讓 Claude 自主執行，以完成閉環。
+
+例如，一個持續執行的監控 agent，可以在 bug 工作單建立後，產生 `intent.md`，接著通過需求、規劃、建置、測試與審查階段。第 6 階段：維護採 headless 方式執行，並在階段之間設置獨立的信心關卡，由確定性檢查或對抗式審查 agent，決定上一階段的產出是繼續往下走，還是上報給人類。
+
+| 傳統 | AI-native |
+|---|---|
+| 維護是被動回應的階段。所有工作單或事件都等待人類採取行動並重新啟動流程。凌晨 3 點觸發的警示可能被錯過，工作單可能留在 backlog 中直到有人接手，而如果另一個緊急狀況先發生，事後檢討的行動項目可能根本不會反映到 codebase。 | 控制區間突破、工作單、頻道訊息或排程等觸發條件，可以在無人介入的情況下呼叫 Claude。Claude 進行診斷，只透過設有關卡的途徑採取行動，並將發現寫成 `intent.md`，接著通過前述各階段。人類負責分流與審查工作，不再需要負責啟動它。 |
+
+### 完成閉環
+
+確定性 script 監看正式環境，並在突破控制區間時呼叫 Claude。監控區間突破，是說明循環如何自主運作的實用範例；本階段結尾的 [Claude Tag](https://claude.com/product/tag)（public beta）小節，則涵蓋從不同管道進來的工作。
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | `intent.md`，讓循環有可用於重新啟動的結構化輸出；由 Claude 加速的 PR 審查；作為行動邊界的 hooks；以及 CI/CD 的 rollback 路徑，最高自主層級會呼叫它。 |
+| 基礎設施 | 可供偵測 script 查詢的指標儲存系統，例如 Prometheus、CI 系統的 API 或同等工具；repository 的讀取權限；在 CI 中以非互動方式執行 Claude Code 的方法，或使用 Agent SDK 建立接收 webhooks 的服務。 |
+
+#### 如何執行
+
+1. 服務負責人或平台工程師選擇一項具有穩定滾動基準的指標，例如 CI 測試失敗率、部署後的 5xx 比率，或 PR 週期時間。
+2. 撰寫偵測 script，通常使用滾動視窗中的平均值與標準差，搭配 Western Electric 或類似規則，讓控制區間既能捕捉緩慢漂移，也能捕捉突增。Script 受到版本控制並有 unit tests；偵測完全保持確定性，不涉及模型。
+3. 在受到版本控制的設定中定義回應層級，見下方 `bands.yaml`。在 1σ 時，script 只記錄；在 2σ 時，以唯讀方式呼叫 Claude 進行診斷；在 3σ 時，Claude 可以採取行動，但只能建立 PR 送入審查關卡，或觸發事先核准的 runbook。
+4. 觸發層可以是 GitHub 或 GitLab 的 scheduled workflow、既有監控系統發出的 webhook，或網路內的 Cron Job。Claude 以無狀態方式執行，可以是 CI runner 上的非互動步驟，或 sandbox container 中的 Agent SDK 服務；CI/CD 實踐方法會涵蓋部署與模型存取選項。由於執行是無狀態且非互動式的，循環可以在無人啟動的情況下開始並結束。
+5. Agent 依照第 1 階段：規劃的格式，將診斷寫成 `intent.md`，涵蓋異常及其證據、預期成果、受影響系統，以及任何待釐清問題。接著，這項發現就像其他工作一樣進入 pipeline。
+6. 服務負責人或 on-call 工程師對佇列進行分流，將面向產品的發現交給 product owner。立即修復、排入時程，或不予處理。不予處理的決定有助於調整控制區間，並減少雜訊。
+7. 修復發布後，為該事件新增 eval，參照持續執行 evals 的實踐方法，確保未來能防範此類問題。
+
+#### 實際樣貌（例如，監控 CI 測試失敗率的 bands.yaml）
 
 ```yaml
 metric: ci_test_failure_rate
@@ -563,55 +894,84 @@ tiers:
             routes: [pull_request, runbook:rollback-deploy] }
 ```
 
-#### Governance considerations
+#### 治理考量
 
-Tier boundaries 由 version-controlled config enforce，並透過 permissions 與 managed settings 拒絕 production access。Invocations、findings 與 triage decisions 都會加上 timestamp 記錄。Service owner 負責 triage 與 approve findings，產生的 changes 仍然會通過正常 PR review gate，而 agent 可以觸發的 runbooks 都已事先批准。
+各層級邊界由受到版本控制的設定強制執行，並透過 permissions 與 managed settings 拒絕正式環境存取。呼叫、發現與分流決策都附帶時間戳記記錄。服務負責人負責分流與核准發現，由此產生的變更通過一般 PR 審查關卡，而 agent 可觸發的 runbooks 都已事先核准。
+
+#### 如何衡量
+
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 從突破控制區間，到分流佇列中出現 `intent.md` 的時間，與過去從事件發生到採取事後檢討行動的時間比較。偵測 script 的 log 包含突破時間戳記與事件層級。 |
+| 落後指標 | 發現轉為已合併修復的比例，將分流佇列與實際 PR 歷史比較；以及同類事件重複發生的情況。隨著修復將案例加入 eval suite，重複事件應減少。 |
 
 #### 範例
 
-- 當 CI test failure rate 突破 3σ，agent 會 quarantine flaky test 或開啟 revert PR，並由 review gate 決定。
-- 當 post-deploy 5xx rate 在 deployment 發生的時間 window 內突破 3σ，agent 會觸發既有 rollback pipeline。
-- 當 PR cycle time 觸發 drift rule，agent 會替 engineering leadership 寫一份 report，證明這套 harness 同樣可以處理 process metrics，而不只是 production metrics。
+- 當 CI 測試失敗率突破 3σ，agent 隔離不穩定測試，或建立 revert PR，再由審查關卡決定。
+- 當部署後的 5xx 比率突破 3σ，且觀察視窗內有部署發生，agent 觸發既有 rollback pipeline。
+- 當 PR 週期時間觸發漂移規則，agent 為工程主管撰寫報告，這顯示 harness 同樣適用於流程指標與正式環境指標。
 
-### Recurring codebase scans
+> 偵測維持確定性。一旦突破控制區間，才呼叫 Claude，而層級決定它可以做什麼。
 
-Security scan 是在某個特定 model 與某個時間點，針對 codebase 做出的判斷，而兩邊都會過時：code 每週都在變，新一代 model 也會發現上一代 model 找不到的 vulnerabilities。AI-native 的答案，是按照 schedule 自動執行 scan，讓 human 不必位於 invocation path 中，並將發現的內容透過與其他 codebase changes 相同的 gates 處理。
+### 定期掃描 codebase
 
-[Claude Security](https://claude.com/product/claude-security) 是 scheduled scanning 的 hosted 形式。連接 GitHub repository 後，scans 會在 Anthropic infrastructure 上使用 Claude Mythos 5 執行，每一個 finding 都會在回報前被驗證，並附上 confidence rating。Suggested patches 會在 Claude Code on the web 中 review 與套用。Organization 不需要自行存取 model，也能取得 findings。
+安全掃描是在某個時間點，使用特定模型，對 codebase 做出的判定；兩者都會過時：程式碼每週都在改變，而每一代模型都會找到前一代遺漏的漏洞。AI-native 的做法是依排程執行掃描，讓呼叫路徑中不需要人類，並將發現送入與其他 codebase 變更相同的關卡。
+
+[Claude Security](https://claude.com/product/claude-security) 是排程掃描的代管形式。連接 GitHub repository 後，掃描會在 Anthropic 的基礎設施上使用 Claude Mythos 5 執行；每項發現都會在回報前經過驗證，並附上信心評級。建議的修補程式會在網頁版 Claude Code 中審查與套用。組織無須取得模型本身的存取權，就能獲得掃描發現。
+
+| 傳統 | AI-native |
+|---|---|
+| 安全掃描是一項特定活動，在發布或稽核之前啟動。報告送入追蹤系統，接著由人類逐步處理 backlog，直到下一次掃描活動。兩次掃描之間撰寫的程式碼，只受到 PR 審查所捕捉問題的涵蓋。 | 對每個已連接的 repository，依排程使用可用的最強模型執行掃描，並在任何人讀取之前驗證發現。每項發現的處理方式與突破控制區間相同：能在一個 PR 內完成的修復，通過審查關卡；更大的項目則成為 `intent.md`。涵蓋範圍的時間基準是最近一次執行，而非第一次。 |
+
+#### 如何開始
+
+| 項目 | 內容 |
+|---|---|
+| 前置條件 | PR 審查關卡與作為核准關卡的 hooks，見第 5 階段：部署，讓發現像其他變更一樣接受審查。對超出單一 PR 範圍的發現，使用第 1 階段：規劃的 `intent.md` 格式。 |
+| 基礎設施 | Claude Security 以 public beta 形式提供給 Claude Enterprise 組織。需要在目標 repositories 上安裝 Anthropic GitHub App，且使用雲端代管的 github.com；啟用 Claude Code on the Web；開啟 Extra Usage 並設定支出上限；為執行掃描的人員提供 premium seats；並由管理員在 `claude.ai/admin-settings/claude-code` 啟用功能。掃描依 Mythos 5 費率按用量計費，因此支出上限應配合 repositories 的大小與數量。 |
 
 #### 如何執行
 
-1. Security lead 連接 repositories，並依 repo、service 或 team 將它們組織成 projects，讓 finding ownership 一開始就清楚。
-2. 對最 critical repositories 執行第一次 full scan，包括過去曾被其他 tools 或較早 models 掃描過的 repositories。把 first scan 當作 baseline。第一次 scan 很可能會在原本被視為 clean 的 code 中找到 findings。
-3. 依 project 設定 schedule。對持續開發中的 services 而言，每週一次是合理的預設。如果 repository 很大或內容混合，則將 scans scope 限制在某個 directory 或 branch。
-4. 在知道 confidence rating 的情況下 triage findings。Dismiss 時附上 reason，讓 dismissal 被記錄，並確保相同 finding 下一次 scan 時不會再次被當成 new finding。
-5. 對 bounded finding，在 Claude Code on the Web 中開啟 suggested patch，review 後透過 PR review gate 處理，和其他 change 一樣。提出 fix 的 agent 沒有任何方式 approve 自己的 fix。
-6. 對任何超出單一 patch 範圍的事情，例如 architectural weakness，或跨 services 重複出現的 pattern，依照 Stage 1 format 寫成 `intent.md`，並從 Plan 開始。
-7. Fix release 到 production 後，為該 vulnerability class 新增一個 eval 到 continuous evals play 的 suite 中，讓 steering agent 的 configuration 從此會針對該 vulnerability class 接受測試。
-8. 將 findings 匯出成 CSV 或 Markdown，或使用 webhooks，讓組織既有 tracker 與 audit systems 繼續作為 system of record，因為那是 auditors 原本就預期資料所在的位置。
+1. 安全主管連接 repositories，並依 repo、服務或團隊將它們組織為 projects，讓發現的責任歸屬從一開始就清楚。
+2. 對最關鍵的 repositories 執行首次完整掃描，包括先前已由其他工具或較早模型掃描過的 repositories。將首次掃描視為基準。首次掃描很可能會在過去認為沒有問題的程式碼中找出問題。
+3. 為每個 project 設定排程。對積極開發中的服務，每週一次是合理的預設值；若 repository 規模較大或混合多種內容，可將掃描範圍限定在某個目錄或 branch。
+4. 參考信心評級對發現進行分流。不予處理時提供原因，讓決定留下紀錄，避免同一項發現在下一次執行時又被當成新問題。
+5. 對範圍明確的發現，在 Claude Code on the Web 中開啟建議的修補程式、審查它，並像其他變更一樣送入 PR 審查關卡。提出修復的 agent 沒有任何途徑核准它。
+6. 對超過單一修補程式範圍的問題，例如架構弱點，或跨服務重複出現的模式，依第 1 階段格式寫成 `intent.md`，從規劃開始。
+7. 修復發布至正式環境後，將該漏洞類別的 eval 加入持續執行 evals 實踐方法的套件，讓引導 agent 的設定從此接受針對該類問題的測試。
+8. 將發現匯出為 CSV 或 Markdown，或使用 webhooks，讓組織既有的追蹤與稽核系統繼續作為正式紀錄系統，保留在稽核人員原本預期的位置。
 
-#### Governance considerations
+#### 治理考量
 
-Scan 在 organization 的 admin controls 下執行，也就是 connected repositories、誰擁有 scan seat，以及 spend limit 都由中央設定。每個 finding 都有 validation result 與 confidence rating，每個 dismissal 都會有 reason，因此 scan history 本身就是一份 audit record，記錄哪些問題被找到、哪些被修正，以及哪些是經過有意識的判斷後接受的。
+掃描在組織的管理控管下執行，代表要連接哪些 repositories、誰持有掃描席次，以及支出上限，都由中央統一設定。每項發現都有驗證結果與信心評級，每項不予處理的決定也都有原因，因此掃描歷史就是稽核紀錄，記載發現了什麼、修復了什麼，以及有意識地接受了什麼。
 
-Fixes 會透過 PR review gate 與 branch protection 進入 production，而不是由 scan 本身直接發布。Claude Security 是 existing static analysis 與 dependency scanning 的補強。Deterministic checks 繼續留在 CI，而 model-driven scan 則負責那些 deterministic checks 本來就不擅長找到的 context-dependent vulnerabilities。
+修復透過 PR 審查關卡與 branch protection 進入正式環境，而不是由掃描本身直接送入。Claude Security 補強既有的 static analysis 與相依套件掃描。確定性檢查保留在 CI 中，而模型驅動的掃描則涵蓋依賴 context、原本不在這些檢查設計範圍內的漏洞。
 
-### 使用 Claude Tag 讓 Claude on call
+#### 如何衡量
 
-Incidents 也可能透過其他方式進入，例如 Slack 或 Teams 等 workplace communication apps。一個 incident 可能長得像晚上 10 點 incident channel 中的一則緊急 fix Slack message，而現在它可以立即被處理。Claude Tag（目前 public beta 可在 Slack 使用）會讓 Claude 以自己的 identity 成為這些 channels 的成員，因此每個新 incident 都會立刻獲得 first responder，而 response 本身也會成為未來 incidents 的 loop 與 memory 一部分。
+| 指標 | 內容 |
+|---|---|
+| 領先指標 | 已連接 repositories 中設有排程的比例，以及從發現回報到修補程式進入 PR 審查關卡的時間，資料來自掃描歷史與 PR metadata。 |
+| 落後指標 | 排程掃描找到的漏洞，與正式環境中發現或外部回報的漏洞之比較，資料來自事件追蹤系統；以及已經歷多次掃描的 repositories，每次掃描發現數量的趨勢。隨著修復與 evals 累積，該數量應下降。 |
 
-Conversation 與 institutional knowledge 都會留在 channel 中，channel 內任何人都能引導並採取 action。任何 team member 都可以即時測試 hypotheses、探索新 options 與進行 investigation，而 channel history 則讓整個流程更具 auditability。Claude 可以透過 MCP 驗證 metric 已恢復 baseline，並在 thread 中確認，接著將 post-mortem 寫進 version-controlled lessons file，讓未來 investigations 可以讀取。
+### 透過 Claude Tag 讓 Claude 值班
 
-Incidents 並不是 Claude Tag 唯一會處理的工作。當它透過 MCP 在 ticket 中被 tagged，或在 channel 中收到要求時，Claude 會以相同方式 triage work。小型且邊界明確的 fix 會透過 review gate 以 PR 進入，而較大的工作則會寫成 Stage 1: Plan 的 `intent.md`，此時 loop 就開始自我 feeding。請參閱：[how Claude Tag runs on-call for CI/CD at Anthropic](https://claude.com/blog/ai-ci-cd-on-call)。
+事件也可能透過其他方式進來，例如 Slack 或 Teams 等工作通訊應用程式。事件可能是晚上 10 點出現在事件頻道、要求緊急修復的 Slack 訊息，而現在可以立即採取行動。Claude Tag 目前以 public beta 形式在 Slack 提供，讓 Claude 以自己的身分成為這些頻道的成員，因此每起新事件都有第一位回應者，而回應本身也成為循環與未來事件記憶的一部分。
 
+對話與組織知識保留在頻道中，任何頻道成員都能引導回應並採取行動。任何團隊成員都可以即時測試假設、探索新選項與調查，而頻道歷史也提升了可稽核性。透過 MCP 存取，Claude 會驗證指標已回到基準，並在討論串中確認，再將事後檢討寫入受到版本控制的經驗紀錄檔案，供未來調查讀取。
 
+事件並非 Claude Tag 唯一會接手的工作。無論是透過 MCP 在工作單中被標記，或在頻道中收到請求，Claude 都會以相同方式分流。小型且範圍明確的修復，以 PR 形式通過審查關卡；更大的工作則寫成第 1 階段：規劃的 `intent.md`，從此循環開始自行產生後續輸入。請參閱：[Claude Tag 如何在 Anthropic 為 CI/CD 值班](https://claude.com/blog/ai-ci-cd-on-call)。
 
-Channel 就是 audit trail：request、diagnosis、human authorization 與 fix 都會保留在 incident 被處理的地方。
+![](https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/6a8760aded54a2a8319cd5b9_fe6d780d.png)
+
+頻道就是稽核軌跡：請求、診斷、人類授權與修復，都保留在處理事件的地方。
 
 ## 結語
 
-Models 與 harnesses 已經變得更加先進，讓組織不只能改變產生 code 的方式，也能改變整個 software development lifecycle。
+模型與 harnesses 已變得更加先進，讓組織不僅能改造產出程式碼的方式，也能改造整個軟體開發生命週期。
 
-這樣的 transformation 讓 human judgement 仍然位於流程核心，同時也納入大型 enterprise organizations 所需要的 governance 與 regulation requirements。
+這項轉型讓人類判斷持續位於流程核心，同時考量大型企業組織的治理與法規要求。
 
-這份指南整合了 Applied AI team 每天替客戶實際執行的許多 best practices，希望你會覺得它是一份實用且能直接採取行動的資源。
+本指南彙整了 Applied AI 團隊每天為客戶實際執行的許多最佳實務，希望你覺得它是一份實用且可付諸行動的資源。
+
+> 循環持續運作。人類判斷始終位於其上。
