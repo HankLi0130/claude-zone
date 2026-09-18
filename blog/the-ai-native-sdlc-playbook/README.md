@@ -1,6 +1,7 @@
 ---
 Source: https://claude.com/blog/the-ai-native-sdlc-playbook
 Course: https://academy.claude.com/courses/ai-native-sdlc-playbook
+10 min HTML: https://hankli0130.github.io/claude-zone/blog/the-ai-native-sdlc-playbook/the-ai-native-sdlc-in-10-min.html
 ---
 
 # AI-Native SDLC 實戰手冊
